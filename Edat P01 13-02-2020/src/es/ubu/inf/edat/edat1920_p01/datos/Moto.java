@@ -4,7 +4,7 @@ package es.ubu.inf.edat.edat1920_p01.datos;
 /**
  * @author bbaruque
  * @author prenedo
- *
+ * @author Jorge Ruiz Gómez
  * Clase para pruebas de codigo de Estructuras de Datos
  */
 public class Moto extends Vehiculo {    
@@ -35,6 +35,31 @@ public class Moto extends Vehiculo {
 
 	public void setRuedas(int ruedas) {
 		Ruedas = ruedas;
+	}
+	
+	@Override
+	/**
+	 * Método que compara si dos objetos (de tipo Moto) son iguales.
+	 * @see Moto
+	 * @param object Un objeto cualquiera a comparar.
+	 */
+	public boolean equals (Object object) {
+		
+		if (! (object instanceof Moto)) {
+			return false;
+		}
+		
+		
+		Moto motoAcomparar = (Moto) object;
+		
+		
+		if (this.getMarca() == motoAcomparar.getMarca()
+				&& this .getModelo() == motoAcomparar.getModelo()) {
+			return true;
+		}else {
+			
+			return false;
+		}
 	}
 
 }

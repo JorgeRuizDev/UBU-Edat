@@ -9,6 +9,15 @@ import org.junit.Test;
 import es.ubu.inf.edat.edat1920_p01.datos.*;
 import es.ubu.inf.edat.edat1920_p01.GestorMatriculados_M;
 
+
+
+/*
+ * TODO:
+ * implmenetar el método equals en moto
+ * Dos motos son iguales si su MARCA y MODELO son iguales.
+ * 
+ * 
+ */
 public class GestorMatriculados_M_Test {
 
 	private GestorMatriculados_M gestor = new GestorMatriculados_M();
@@ -33,7 +42,7 @@ public class GestorMatriculados_M_Test {
 		Vehiculo[] nuevos = GeneradorVehiculos.todos();
 		gestor.cargaListado(nuevos);
 		
-		Iterator<Vehiculo> it = gestor.iterator();
+		Iterator<Moto> it = gestor.iterator();
 		int recuperadas = 0;
 		
 		while(it.hasNext()){
@@ -92,7 +101,7 @@ public class GestorMatriculados_M_Test {
 	@Test
 	public void testVacio() {
 		
-		Iterator<Vehiculo> it = gestor.iterator();
+		Iterator<Moto> it = gestor.iterator();
 		int recuperadas = 0;
 		
 		while(it.hasNext()){
