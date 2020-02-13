@@ -142,12 +142,8 @@ public class GestorMatriculados_M implements Iterable<Moto>{
 					}
 				}
 			}
-			
 			return null;
 			
-		}
-		
-		
+		}	
 	}
-	
 }
