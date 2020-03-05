@@ -105,9 +105,8 @@ public class ContenedorAscendente<E> extends AbstractCollection<E>{
 	 * ¿Por qué? Razona tu respuesta.	 */
 	
 	/*
-	 * No es necesario, porque size ya está implementado en la clase de arriab, y isEmpty puede ser últil, 
-	 * pero los statemens:
-	 * 
+	 * int size() si que es obligatorio ya que es abstracta según la documentación
+	 * isEmpty() no es necesaria, pero si que es recomendable. 
 	 * if (isEmpty()) e if (size() == 0) darían exactamente el mismo resultado, sólo que el primero
 	 * mejora la estructura y legibilidad del código.
 	 * */
