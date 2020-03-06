@@ -11,15 +11,26 @@ import javax.imageio.IIOException;
 
 import es.ubu.inf.edat.P01_1920.data.DataLoader;
 
+/**
+ * Clase con métodos estáticos que permiten calcular el problema "3SUM" con dos métodos distintos.
+ * 
+ * @author Jorge Ruiz Gómez
+ * @authot Alejandro Ortega Martínez
+ */
 public class ThreeSumCalculation {
 
-	
+	/**
+	 * Método raíz: Permite ejecutar el benchamark con todos los enteros que se encuentren en el directorio ./data
+	 * y genera un archivo .csv con los tiempos de ejecución de cada ejecución.
+	 */
     public static void main(String[] args)  { 
     	
     	String directorioDatos="./data";
     	
     	PrintWriter archivoResultados = null;
-    	long t1,t2,t3,t4;	//tiempos
+    	
+    	long t1 = 0,t2,t3,t4;	//tiempos
+    	
     	DataLoader in = null;
     	
     	try {
@@ -29,42 +40,46 @@ public class ThreeSumCalculation {
 	        String [] listadoArchivos = directorio.list();
 	        
 	        //Archivo .csv
+	        new FileWriter("resultados.csv",false).close();	//Sin append, para borrar los contenidos
 	        archivoResultados = new PrintWriter (new FileWriter("resultados.csv",true));
-	        archivoResultados.printf("nº Elemenetos,Método Aleatorio, Método Ordenados");
+	        
+	        //cabecera del archivo:
+	        archivoResultados.printf("nº Elemenetos,Método Aleatorio, Método Ordenados\n");
 	        
 	        for (String archivo : listadoArchivos) {
+	        	
 	        	archivo = directorioDatos + "/" + archivo;
-	        	System.out.printf("Archivo: %s\n",archivo);
 		        in.LoadFile(archivo);
 		        int[] a = in.readAllInts();
 		        in.close();
 		        
-
+		        System.out.printf("Calculando con los %d enteros del archivo: %s\n",a.length,archivo);
 		        
 		        t1 = System.currentTimeMillis();
 		        int[][] result = findTriplets_random(a);
 		        t2 = System.currentTimeMillis();
 		        
+		        
 		        t3 = System.currentTimeMillis();
 		        result = findTriplets_ordered(a);
 		        t4 = System.currentTimeMillis();
 		        
-		        archivoResultados.printf("%d,%f,%f\n",a.length,t2-t1,t4-t3);
-		        System.out.printf("%d,%f,%f\n",a.length,t2-t1,t4-t3);
+		        archivoResultados.printf("%d,%d,%d\n",a.length,t2-t1,t4-t3);
 	        }
         }catch(IOException e) {
 	        	e.printStackTrace();
 	    }finally {
-	        	
 	    	archivoResultados.close();
+	    	System.out.printf("Fin de la ejecucion\n");
 	    }
     }
 	
     
     /**
-     *  
-     * @param a
-     * @return
+     * Método 1.
+     * Descripción: Encuentra mediante fuerza bruta todas las tripletas, a partir de probar todas las combinaciones.
+     * @param a Array de enteros con el que calcuar 3SUM, no debe haber enteros repetidos.
+     * @return un array con n tripletas (siendo una tripleta un array de 3 enteros).
      */
     public static int[][] findTriplets_random(int[] a){
 
@@ -91,9 +106,11 @@ public class ThreeSumCalculation {
     
 
     /**
-     * 
-     * @param a
-     * @return
+     * Método 2.
+     * Descripción: utiliza la búsqueda binaria para encontrar el tercer número restante que forme una tripleta.
+     * @see busquedaBinaria
+     * @param a Array de enteros con el que calcuar 3SUM, no debe haber enteros repetidos.
+     * @return un array con n tripletas (siendo una tripleta un array de 3 enteros).
      */
     public static int[][] findTriplets_ordered(int[] a){
 
@@ -109,9 +126,7 @@ public class ThreeSumCalculation {
     			int posicionBuscado = busquedaBinaria(b,buscado);
     			
     			if(  posicionBuscado>=0 && posicionBuscado > j) {
-
     				int[] temp = new int[3];
-    				System.out.println(buscado);
     				temp[0]=b[i];
     				temp[1]=b[j];
     				temp[2]=buscado;
@@ -134,8 +149,8 @@ public class ThreeSumCalculation {
      * 
      * As a reminder: in order to implement the binary search, the array must be first ordered.
      * 
-     * @param array contenedor en el que se realiza la búsqueda
-     * @param buscado elemento a localizar
+     * @param array contenedor en el que se realiza la búsqueda.
+     * @param buscado elemento a localizar.
      * @return posicion en la que se encuentra el elemento o número negativo en caso de no encontrarse.
      */
     public static int busquedaBinaria(int[] array, int buscado) {
