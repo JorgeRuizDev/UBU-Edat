@@ -16,8 +16,8 @@ public class GeneradorEnteros {
 	/**
 	 * Genera numeros aleatorios entre -tamano y tamano. Incluye numeros negativos.
 	 * 
-	 * @param tamano
-	 * @return
+	 * @param tamano integer del intervalo a genera y tamaño de la lista.
+	 * @return lista con los ints.
 	 */
 	public static List<Integer> listaAleatoria (int tamano){
 		
@@ -41,10 +41,10 @@ public class GeneradorEnteros {
 	 * Devuelve una lista de numeros aleatorios. Los numeros perteneceran siempre
 	 * al rango delimitado por los limites inferior y superior. 
 	 * 
-	 * @param tamano
-	 * @param inferior
-	 * @param superior
-	 * @return
+	 * @param tamano tamaño de la lista.
+	 * @param inferior límite máximo.
+	 * @param superior límite mínimo.
+	 * @return lista aleatoria con los enteros generados.
 	 */
 	public static List<Integer> listaAleatoria (int tamano, int inferior, int superior){
 		
@@ -61,10 +61,10 @@ public class GeneradorEnteros {
 	/**
 	 * Genera una lista aleatoria seleccionando solo de entre los elementos indicados
 	 * en la lista pasada como parametro.
-	 * 
-	 * @param tamano
-	 * @param seleccionables: lista de los elementos que se pueden seleccionar
-	 * @return
+	 * @param <E> elemento.
+	 * @param tamano tamaño de la lista.
+	 * @param seleccionables: lista de los elementos que se pueden seleccionar.
+	 * @return lista aleatoria de enteros.
 	 */
 	public static <E> List<E> listaAleatoria (int tamano, List<E> seleccionables){
 		
@@ -77,10 +77,10 @@ public class GeneradorEnteros {
 	}
 	
 	/**
-	 * 
-	 * @param tamano
-	 * @param repetidos
-	 * @return
+	 * Méodo publico que genera lista aleatoria.
+	 * @param tamano tamaño de la lista a generar.
+	 * @param repetidos float con la diferencia mínima para tratar de repetido.
+	 * @return lista aleatoria. 	
 	 */
 	public static List<Integer> listaAleatoria (int tamano, float repetidos){
 		
@@ -111,8 +111,8 @@ public class GeneradorEnteros {
 	/**
 	 * Genera una lista aleatoria de números únicos (sin ningun elemento repetido).	
 	 * 
-	 * @param tamano
-	 * @return
+	 * @param tamano tamaño de la lista.
+	 * @return lista de aleatorios unicos.
 	 */
 	public static List<Integer> listaAleatoriaUnicos (int tamano){
 		
@@ -133,8 +133,8 @@ public class GeneradorEnteros {
 	/**
 	 * Genera numeros aleatorios entre -100 y 100. Incluye numeros negativos.
 	 * 
-	 * @param tamano
-	 * @return
+	 * @param tamano tamaño de la lista.
+	 * @return lista aleatoria.
 	 */
 
 	public static int[] arrayAleatorio(int tamano){
@@ -152,10 +152,10 @@ public class GeneradorEnteros {
 	
 	/**
 	 * 
-	 * @param tamano
-	 * @param min
-	 * @param max
-	 * @return
+	 * @param tamano tamaño de la lista.
+	 * @param min entero mínimo.
+	 * @param max entero máximo.
+	 * @return lista aleatoria.
 	 */
 	public static int[] arrayAleatorio(int tamano, int min, int max){
 		
@@ -170,7 +170,11 @@ public class GeneradorEnteros {
 	}
 
 	
-
+	/**
+	 * Método público que genera una lista de números aleatorios sin repetir.
+	 * @param tamano tamaño del array a generar.
+	 * @return array con números aleatorios.
+	 */
 	public static int[] arrayAleatorioUnicos(int tamano){
 		
 		List<Integer> lista = listaAleatoriaUnicos (tamano);
@@ -184,7 +188,12 @@ public class GeneradorEnteros {
 		
 	}
 	
-	
+	/**
+	 * Método que convierte un array a texto.
+	 * @param <E> Elemento.
+	 * @param array array a convertir.
+	 * @return string con el array separado con comas.
+	 */
 	public static <E> String toString (int[] array){
 		String s = "[" + array[0];
 		for(int i=1; i<array.length; i++){

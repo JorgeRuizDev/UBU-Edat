@@ -1,0 +1,163 @@
+package es.ubu.inf.edat.P02_1920;
+
+import java.util.AbstractQueue;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class ColaMixta<E> extends AbstractQueue<E> {
+	
+	private NodoMixto primero;
+	private NodoMixto ultimo;
+	private int tamañoNodo;
+
+	protected class NodoMixto extends AbstractQueue<E> {
+
+		private List<E> contenido;
+		private NodoMixto siguiente;
+		private NodoMixto anterior;
+		
+		public NodoMixto() {
+			contenido = new ArrayList<E>(tamañoNodo);
+		}
+		
+		@Override
+		public boolean offer(E e) {
+			if(contenido.size()<tamañoNodo) {
+				contenido.add(e);
+
+				return true;
+			} else
+			return false;
+		}
+		@Override
+		public E poll() {
+			E devolver = null;
+			devolver = contenido.get(0);
+			contenido.remove(0);
+			return devolver;
+		}
+		@Override
+		public E peek() {
+			E devolver = null;
+			devolver = contenido.get(0);
+			return devolver;
+		}
+		@Override
+		public Iterator<E> iterator() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		@Override
+		public int size() {
+			return contenido.size();
+		}
+		
+		public NodoMixto getSiguienteNodo() {
+			return siguiente;
+		}
+		
+		public void asignarSiguienteNodo(NodoMixto siguiente) {
+			this.siguiente=siguiente;
+		
+		}
+		
+		public void asignarAnteriorNodo(NodoMixto anterior) {
+			this.anterior=anterior;
+		}
+		public NodoMixto getAnteriorNodo() {
+			return anterior;
+		}
+
+		// TODO A completar por el estudiante
+		// TODO To be completed by the students
+
+	}
+
+	// TODO Definicion de variables de clase ColaMixta
+	// TODO Variable definition class ColaMixta
+
+	/**
+	 * Constructor de la clase
+	 * 
+	 * @param tamañoNodo Numero de elementos que se introducen como maximo en un
+	 *                   nodo
+	 */
+	public ColaMixta(int tamañoNodo) {
+		this.tamañoNodo=tamañoNodo;
+		primero=new NodoMixto();
+		ultimo = primero;
+	}
+
+	public E peek(int index) {
+		return ultimo.peek();
+	}
+
+	/**
+	 * Iterador que permite recorrer todos los elementos de la cola. Debe recorrer
+	 * cada segmento de la misma (empleando el iterador del nodo) y pasar al nodo
+	 * siguiente para repetir la operación. Se detiene al no haber más nodos.
+	 *
+	 * @param <E>
+	 */
+	private class IteradorMixto implements Iterator<E> {
+
+		// TODO A completar por el estudiante
+		// TODO To be completed by the students
+
+	}
+
+	@Override
+	public boolean offer(E e) {
+		if (ultimo.size()<tamañoNodo) {
+			ultimo.offer(e);
+			return true;
+		} else if (ultimo.size()==tamañoNodo) {
+			NodoMixto nuevoNodo = new NodoMixto();
+			NodoMixto antiguoUltimo = ultimo;
+			ultimo = nuevoNodo;
+			ultimo.asignarAnteriorNodo(antiguoUltimo);
+			ultimo.offer(e);
+			return true;
+		} else
+			return false;
+	}
+
+	@Override
+	public E poll() {
+		E sacar = primero.poll();
+		if(primero.size()==0) {
+			primero = primero.getSiguienteNodo();
+		}
+		return sacar;
+	}
+
+	@Override
+	public E peek() {
+		primero.peek();
+		return null;
+	}
+
+	@Override
+	public Iterator<E> iterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int size() {
+		boolean flag = true;
+		int contadorTamaño=0;
+		NodoMixto siguienteNodo = primero;
+		while(flag) {
+			contadorTamaño+=siguienteNodo.size();
+			if(siguienteNodo.getSiguienteNodo()!=null) {
+				siguienteNodo=siguienteNodo.getSiguienteNodo();
+			}else {
+				flag = false;
+			}
+		}
+		return contadorTamaño;
+	}
+
+}

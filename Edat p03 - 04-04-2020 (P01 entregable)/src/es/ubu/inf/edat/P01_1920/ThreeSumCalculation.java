@@ -13,18 +13,22 @@ import es.ubu.inf.edat.P01_1920.data.DataLoader;
 
 /**
  * Clase con métodos estáticos que permiten calcular el problema "3SUM" con dos métodos distintos.
- * 
+ * 	Método 1: Random: Recorre todos los arrays probando cada una de las combinaciones
+ *  Método 2: Ordered: Prueba todas las cobinaciones posibles con sólo dos números, y luego busca
+ *  			si la lista contiene el elemento restante para completar el problema mediante búsqueda
+ *  			búsqueda binaria.
  * @author Jorge Ruiz Gómez
- * @authot Alejandro Ortega Martínez
+ * @author Alejandro Ortega Martínez
  */
 public class ThreeSumCalculation {
 
 	/**
 	 * Método raíz: Permite ejecutar el benchamark con todos los enteros que se encuentren en el directorio ./data
 	 * y genera un archivo .csv con los tiempos de ejecución de cada ejecución.
+	 * @param args Nada. 
 	 */
     public static void main(String[] args)  { 
-    	
+    	args=null;
     	String directorioDatos="./data";
     	
     	PrintWriter archivoResultados = null;
@@ -144,10 +148,6 @@ public class ThreeSumCalculation {
      * Si el array contiene el mismo elemento en varias posiciones, se devolverá cualquiera de ellas.
      * Se recuerda que para poder realizar la implementación de la búsqueda binaria, el array debe ser antes ordenado.
      * 
-     * It performs the binary search for an element on an array. It will return the position of the element or a negative number if the element is not in the array.
-     * If the array contains the same element in several positions, any of them will be returned.
-     * 
-     * As a reminder: in order to implement the binary search, the array must be first ordered.
      * 
      * @param array contenedor en el que se realiza la búsqueda.
      * @param buscado elemento a localizar.
@@ -183,7 +183,6 @@ public class ThreeSumCalculation {
         	}
     		
     		if(limiteSuperior-limiteInferior<=1) {
-        		//System.out.println("Hola");
         		if (array[limiteSuperior]==buscado) {
         			return limiteSuperior;
         		}
@@ -192,7 +191,7 @@ public class ThreeSumCalculation {
         		}
         		flag = false;
         	}
-    		//System.out.printf ("limiteInferior[%d] = %d | límiteSuperior[%d] = %d | Valor Buscado = %d \n",limiteInferior, array[limiteInferior], limiteSuperior, array[limiteSuperior], buscado );
+    		
     	}
     	
     	
