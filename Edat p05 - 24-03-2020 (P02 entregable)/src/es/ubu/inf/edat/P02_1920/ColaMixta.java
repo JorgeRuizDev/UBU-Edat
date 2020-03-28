@@ -206,7 +206,7 @@ public class ColaMixta<E> extends AbstractQueue<E> {
 	/**
 	 * Método privado que permite añadir más nodos a la cola una vez las colas están llenas
 	 * 
-	 * @return estado final: True -> Se ha podido añadir el nodo. False -> La última cola no está llena por lo que no puede ser cambiada.
+	 * @return estado final: True:  Se ha podido añadir el nodo. False: La última cola no está llena por lo que no puede ser cambiada.
 	 */
 	@Override
 	public boolean offer(E e) {
