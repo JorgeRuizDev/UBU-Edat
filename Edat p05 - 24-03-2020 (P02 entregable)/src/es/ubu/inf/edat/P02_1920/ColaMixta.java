@@ -18,30 +18,36 @@ public class ColaMixta<E> extends AbstractQueue<E> {
 	/*
 	 * Valor que indica el tamaño de cada nodo.
 	 */
-	private int tamañoNodo;
+	private final int  tamañoNodo;
 
 	protected class NodoMixto extends AbstractQueue<E> {
 
-		/*
+		/**
 		 * Lista de elemmentos.
 		 */
-		private List<E> contenido;
-		/*
+		private final List<E> contenido;
+		/**
 		 * Referencia al siguiente NODO.
 		 */
 		private NodoMixto siguiente;
-		/*
+		/**
 		 * Referencia al Nodo anterior.
 		 */
 		private NodoMixto anterior;
 		
-		/*
-		 * Constructor de la calse.
+		/**
+		 * Constructor de la clase.
 		 */
 		public NodoMixto() {
 			contenido = new ArrayList<E>(tamañoNodo);
 		}
-		
+
+		/**
+		 * Método booleano que permite añadir un elemento a la cola.
+		 * Si el nodo está lleno, añade un nuevo nodo.
+		 * @param e Elemento a añadir.
+		 * @return siempre true.
+		 */
 		@Override
 		public boolean offer(E e) {
 			if(contenido.size()<tamañoNodo) {
@@ -51,6 +57,12 @@ public class ColaMixta<E> extends AbstractQueue<E> {
 			} else
 			return false;
 		}
+
+		/**
+		 * Método booleano que extrae el primer elemento del nodo. Antes de devolverlo, lo elimina.
+		 * Si el nodo está vacía devuelve null.
+		 * @return elemento.
+		 */
 		@Override
 		public E poll() {
 			E devolver = null;
@@ -58,6 +70,11 @@ public class ColaMixta<E> extends AbstractQueue<E> {
 			contenido.remove(0);
 			return devolver;
 		}
+
+		/**
+		 * Médoto que muestra el primer elemento del nodo, sin borrarlo.
+		 * @return elemento.
+		 */
 		@Override
 		public E peek() {
 			
@@ -66,63 +83,108 @@ public class ColaMixta<E> extends AbstractQueue<E> {
 			
 			return contenido.get(0);
 		}
-		
+
+		/**
+		 * Muestra el elemento que está en una posición del nodo.
+		 * @param index posición del elemento.
+		 * @return elemento de una posición. Null si dicha posición está vacía.
+		 */
 		public E peek (int index) {
 			if (index < 0 || index >= tamañoNodo || contenido.size() == 0)
 				return null;
 			
 			return contenido.get(index);
 		}
+
+		/**
+		 * Iterador de la colección.
+		 * @return el iterador correspondiente al nodo.
+		 */
 		@Override
 		public Iterator<E> iterator() {
-			// TODO Auto-generated method stub
 			return new IteradorNodo();
 		}
+
+		/**
+		 * Devuelve el número de elementos qu contiene el nodo.
+		 * @return entero que indica el tamaño.
+		 */
 		@Override
 		public int size() {
 			return contenido.size();
 		}
-		
+
+		/**
+		 * Iterador del nodo.
+		 */
 		private class IteradorNodo implements Iterator<E> {
-			int punteroUltimaPos;
-			
+			/**
+			 * Entero que guarda el último elemento devuelto.
+			 */
+			private int punteroUltimaPos;
+
+			/**
+			 * Constructor del iterador.
+			 */
 			IteradorNodo(){
 				this.punteroUltimaPos = 0;
 			}
+
+			/**
+			 * Método que deuvelve si hay algún elemento restante por iterar en el nodo.
+			 * @return booleano true o false.
+			 */
 			@Override
 			public boolean hasNext() {
-				if (punteroUltimaPos < contenido.size())
-					return true;
-				else
-					return false;
+				return punteroUltimaPos < contenido.size();
 			}
 
+			/**
+			 * Método que devuelve el siguiente método a iterear.
+			 */
 			@Override
 			public E next() {
-				E elemento = contenido.get(punteroUltimaPos);
-				punteroUltimaPos++;
-				return elemento;
+				if (this.hasNext()) {
+					E elemento = contenido.get(punteroUltimaPos);
+					punteroUltimaPos++;
+					return elemento;
+				}
+				else
+					return null;
 			}	
 			
 		}
-		
+
+		/**
+		 * Méotodo que devuelve el siguiente nodo al al actual.
+		 * @return referencia al siguiente nodo en la cola, si no hay otro nodo, devuelve null.
+		 */
 		public NodoMixto getSiguienteNodo() {
 			return siguiente;
 		}
-		
+
+		/**
+		 * Método que asigna el sisguiente nodo en la cola respescto al nodo actual.
+		 * @param siguiente Siguiente nodo a referenciar.
+		 */
 		public void setSiguienteNodo(NodoMixto siguiente) {
 			this.siguiente=siguiente;
-		
 		}
-		
+
+		/**
+		 * Método permite actualizar el nodo anterior al que referencia este nodo.
+		 * @param anterior nodo anterior.
+		 */
 		public void setAnteriorNodo(NodoMixto anterior) {
 			this.anterior=anterior;
 		}
+		/**
+		 * Método que devuelve el nodo anterior en la cola. Si no hay un nodo devuelve null (si es el primer nodo).
+		 * @return referencia al nodo anterior.
+		 */
 		public NodoMixto getAnteriorNodo() {
 			return anterior;
 		}
-		
-
 	}
 
 	
@@ -146,7 +208,6 @@ public class ColaMixta<E> extends AbstractQueue<E> {
 	 * 
 	 * @return estado final: True -> Se ha podido añadir el nodo. False -> La última cola no está llena por lo que no puede ser cambiada.
 	 */
-
 	@Override
 	public boolean offer(E e) {
 		if (!isUltimoNodoLleno()) {
@@ -179,10 +240,19 @@ public class ColaMixta<E> extends AbstractQueue<E> {
 	}
 
 	@Override
+	/**
+	 * Método que muestra el primer elemento de la la cola.
+	 * @return elemento.
+	 */
 	public E peek() {
 		return primero.peek();
 	}
-	
+
+	/**
+	 * Método sobrecargado que permite obtener un elemento en cualquier posición.
+	 * @param index Posición en la que queremos obtener el elemento.
+	 * @return el elemento o Null si el índice está fuera de la cola.
+	 */
 	public E peek (int index) {
 		
 		
@@ -212,12 +282,12 @@ public class ColaMixta<E> extends AbstractQueue<E> {
 		return nodo.peek(posicionEnNodo);
 	}
 
+	/**
+	 * Método que devuelve el iterador de la cola.
+	 * @return el iterador correspondiente a la cola.
+	 */
 	@Override
 	public Iterator<E> iterator() {
-		
-		
-		
-		
 		return new IteradorMixto();
 	}
 
@@ -247,56 +317,27 @@ public class ColaMixta<E> extends AbstractQueue<E> {
 				flag = false;
 			}
 		}
-		return contadorTamaño;	
-		
+		return contadorTamaño;
 	}
 	
 	/*
-	 * 
 	 * Métodos de control
-	 * 
 	 */
 	
 	/**
 	 * Método privado que nos indica si el último nodo de la cola está lleno.
-	 * @return
+	 * @return true o false.
 	 */
 	private boolean isUltimoNodoLleno() {
-		if (ultimo.size() < this.tamañoNodo) 
-			return false;
-		else 
-			return true;
+		return ultimo.size() >= this.tamañoNodo;
 	}
+
 	/**
 	 * Método privado que nos indica si el último nodo está vacío
-	 * @return
-	 */
-	private boolean isUltimoNodoVacío() {
-		if (ultimo.size() == 0) 
-			return true;
-		else 
-			return false;
-		
-	}
-	/**
-	 * Método privado que nos indica si el último nodo de la cola está lleno.
-	 * @return
-	 */
-	private boolean isPrimerNodoLleno() {
-		if (primero.size() < this.tamañoNodo) 
-			return false;
-		else 
-			return true;
-	}
-	/**
-	 * Método privado que nos indica si el último nodo está vacío
-	 * @return
+	 * @return true o false.
 	 */
 	private boolean isPrimerNodoVacío() {
-		if (primero.size() == 0) 
-			return true;
-		else 
-			return false;
+		return primero.size() == 0;
 	}
 	
 	/**
@@ -323,8 +364,8 @@ public class ColaMixta<E> extends AbstractQueue<E> {
 	}
 	
 	/**
-	 * Método privado que permite eliminar un nodo y unir el resto.
-	 * 
+	 * Método privado que permite eliminar un nodo y unir el resto para no romper la cadena.
+	 * @param nodo Nodo a borrar,
 	 * @return true si se han realizado cambios y false si no.
 	 */
 	private boolean eliminarNodo(NodoMixto nodo) {
@@ -360,37 +401,52 @@ public class ColaMixta<E> extends AbstractQueue<E> {
 	 * cada segmento de la misma (empleando el iterador del nodo) y pasar al nodo
 	 * siguiente para repetir la operación. Se detiene al no haber más nodos.
 	 *
-	 * @param <E>
 	 */
 	private class IteradorMixto implements Iterator<E> {
-		
+		/**
+		 * Nodo que está siendo iterado
+		 */
 		NodoMixto nodoIterado;
+		/**
+		 * El iterador del nodo que está siendo iterado
+		 */
 		Iterator<E> itNodoIterado;
-		
+
+		/**
+		 * Constructor del iterador.
+		 */
 		IteradorMixto(){
 			nodoIterado = primero;
 			itNodoIterado = primero.iterator();
 		}
-		
+
+		/**
+		 * Método que responde si quedan elementos en la cola a iterar.
+		 * @return true si quedan, false si ya se han iterado todos.
+		 */
 		@Override
 		public boolean hasNext() {
 			
-			if (itNodoIterado.hasNext()) {
+			if (itNodoIterado.hasNext()) { //Si el nodo actual tiene elementos
 				return true;
 			}
 			else if (nodoIterado.getSiguienteNodo() != null){ //si hay más nodos
 				
 				nodoIterado = nodoIterado.getSiguienteNodo();
 				itNodoIterado = nodoIterado.iterator();
-				
+
+
 				return itNodoIterado.hasNext();
 			}else {
 				return false;
 			}
-			
-			
+
 		}
 
+		/**
+		 * Méotodo que devuelve el siugiente elemento a iterar.
+		 * @return el siguiente elemento.
+		 */
 		@Override
 		public E next() {
 			if (this.hasNext())
