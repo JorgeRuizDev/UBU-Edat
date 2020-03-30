@@ -12,7 +12,7 @@ import java.util.Map;
  * @author bbaruque
  *
  */
-public class Traductor <K, V> {
+public class Traductor {
 
 	/**
 	 * Mapa que contendrá las traducciones para realizar luego la consulta.
@@ -39,7 +39,7 @@ public class Traductor <K, V> {
 		else if (Arrays.equals(idioma1, idioma2))
 			return 0;
 
-		mapa = new HashMap<String,String>(idioma1.length); //instanciamos el mapa con un tamaño fijo.
+		mapa = new HashMap<>(idioma1.length); //instanciamos el mapa con un tamaño fijo.
 
 		for (int i = 0; i< idioma1.length; i++){
 			mapa.put(idioma1[i], idioma2[i]);

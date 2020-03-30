@@ -1,4 +1,4 @@
-package es.ubu.lsi.edat.sesion06;
+package es.ubu.gii.edat.sesion06;
 
 import static org.junit.Assert.*;
 

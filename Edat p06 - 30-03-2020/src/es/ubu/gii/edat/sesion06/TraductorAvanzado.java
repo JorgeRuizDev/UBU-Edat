@@ -19,7 +19,7 @@ public class TraductorAvanzado {
 	 * Se deberá instanciar un mapa que contendrá las traducciones para realizar luego la consulta.
 	 * En este caso el mapa deberá implementarse como un multimapa para las operaciones avanzadas.
 	 */
-	HashMap <String, List <String>> mapa = new <String, List <String>>  HashMap();
+	Map <String, List <String>> mapa = new HashMap<>();
 
 	/**
 	 * Método que permite almacenar las diferentes traducciones dentro del Mapa
@@ -50,7 +50,7 @@ public class TraductorAvanzado {
 			//Si no se encuentra almacenada en el mapa:
 			if (!mapa.containsKey(idioma1[i])){
 				//Creamos una nueva lista y la añadimos al mapa con la lista como valor
-				List<String> listaSinonimosTraducidos = new LinkedList<String>();
+				List<String> listaSinonimosTraducidos = new LinkedList<>();
 				listaSinonimosTraducidos.add(idioma2[i]);
 				mapa.put(idioma1[i], listaSinonimosTraducidos);
 
@@ -119,7 +119,7 @@ public class TraductorAvanzado {
 	public List<String> buscaSinonimos(String buscada){
 
 		List <String> resultadosBusqeudaInversa = this.buscaTraduccionInversa(buscada);
-		List <String> listaSinonimos = new ArrayList<String>();
+		List <String> listaSinonimos = new ArrayList<>();
 		
 		for (String sinonimo : resultadosBusqeudaInversa){
 			listaSinonimos.addAll(this.mapa.get(sinonimo));
