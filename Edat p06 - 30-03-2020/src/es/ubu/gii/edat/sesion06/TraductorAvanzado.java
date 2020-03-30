@@ -126,7 +126,7 @@ public class TraductorAvanzado {
 		}
 
 		//Eliminamos la palabra buscada ya que no forma parte de los sinónimos.
-		while (listaSinonimos.contains(buscada)) listaSinonimos.remove(buscada);
+		while ( listaSinonimos.remove(buscada) );
 
 		return listaSinonimos;
 	}
