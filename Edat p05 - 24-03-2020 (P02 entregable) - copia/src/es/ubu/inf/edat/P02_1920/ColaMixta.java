@@ -7,14 +7,6 @@ import java.util.List;
 
 public class ColaMixta<E> extends AbstractQueue<E> {
 	
-
-
-
-
-
-
-
-	
 	/*
 	 * Referencia al primer nodo de la cola.
 	 */
