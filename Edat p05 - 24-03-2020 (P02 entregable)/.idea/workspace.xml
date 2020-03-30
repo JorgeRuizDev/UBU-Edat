@@ -103,10 +103,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="390" y="119" key="CommitChangelistDialog2/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585398158200" />
-    <state x="738" y="276" key="FileChooserDialogImpl" timestamp="1585397030206">
+    <state x="738" y="276" key="FileChooserDialogImpl" timestamp="1585582628633">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="738" y="276" key="FileChooserDialogImpl/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585397030206" />
+    <state x="738" y="276" key="FileChooserDialogImpl/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585582628633" />
     <state width="1877" height="191" key="GridCell.Tab.0.bottom" timestamp="1585503486938">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -131,13 +131,17 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="257" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585398161246" />
-    <state x="667" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1585497714077">
+    <state x="667" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1585582594458">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="667" y="349" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585497714077" />
+    <state x="667" y="349" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585582594458" />
     <state x="771" y="440" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585397926998">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="771" y="440" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585397926998" />
+    <state x="342" y="147" key="new project wizard" timestamp="1585582636210">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="342" y="147" key="new project wizard/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585582636210" />
   </component>
 </project>

@@ -1,0 +1,10 @@
+*/bin
+*/out
+*/doc
+*idea
+*.zip
+*.rar
+*.project
+*.classpath
+*.settings
+*.iml
