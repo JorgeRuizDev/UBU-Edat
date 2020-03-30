@@ -8,7 +8,7 @@ import java.util.Map;
  * Clase que permite implementar un diccionario bilingüe para obtener 
  * la traducción de palabras entre dos idiomas empleando  alguna de las 
  * clases que implementan HashMap.
- * 
+ * @author Jorge Ruiz Gómez
  * @author bbaruque
  *
  */

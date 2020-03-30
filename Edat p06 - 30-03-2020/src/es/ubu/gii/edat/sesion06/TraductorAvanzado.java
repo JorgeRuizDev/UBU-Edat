@@ -10,7 +10,7 @@ import java.util.*;
  * En este caso se implementan funciones más avanzadas sobre la original.
  * 
  * @author bbaruque
- *
+ * @author Jorge Ruiz Gómez
  */
 
 public class TraductorAvanzado {
@@ -19,7 +19,7 @@ public class TraductorAvanzado {
 	 * Se deberá instanciar un mapa que contendrá las traducciones para realizar luego la consulta.
 	 * En este caso el mapa deberá implementarse como un multimapa para las operaciones avanzadas.
 	 */
-	Map <String, List <String>> mapa = new HashMap<>();
+	private Map <String, List <String>> mapa = new HashMap<>();
 
 	/**
 	 * Método que permite almacenar las diferentes traducciones dentro del Mapa
@@ -48,18 +48,16 @@ public class TraductorAvanzado {
 		for (int i = 0; i< idioma1.length; i++) {
 
 			//Si no se encuentra almacenada en el mapa:
+			List<String> listaSinonimosTraducidos;
 			if (!mapa.containsKey(idioma1[i])){
 				//Creamos una nueva lista y la añadimos al mapa con la lista como valor
-				List<String> listaSinonimosTraducidos = new LinkedList<>();
-				listaSinonimosTraducidos.add(idioma2[i]);
-				mapa.put(idioma1[i], listaSinonimosTraducidos);
-
-			} else {
-				//Añadimos a la lista de resultados con el nuevo elemento
-				List<String> listaSinonimosTraducidos = mapa.get(idioma1[i]);
-				listaSinonimosTraducidos.add(idioma2[i]);
-				mapa.put(idioma1[i], listaSinonimosTraducidos);
+				listaSinonimosTraducidos = new LinkedList<>();
+			} else {//si existe la lista, la guardamos para modificarla más adelante
+				listaSinonimosTraducidos = mapa.get(idioma1[i]);
 			}
+			//añadimos la nueva palabra a la lista y la guardamos junto a su clave.
+			listaSinonimosTraducidos.add(idioma2[i]);
+			mapa.put(idioma1[i], listaSinonimosTraducidos);
 		}
 
 
@@ -93,11 +91,11 @@ public class TraductorAvanzado {
 	private List<String> buscaTraduccionInversa (String buscada){
 		List <String> listaDevolver = new LinkedList<>();
 
-		for (Map.Entry<String, List<String>> entrada : this.mapa.entrySet()){
-			for (int i = 0; i < entrada.getValue().size(); i++){
-				if (entrada.getValue().get(i).equals(buscada)) {
+		for (Map.Entry<String, List<String>> entradaIterada : this.mapa.entrySet()){
+			for (int i = 0; i < entradaIterada.getValue().size(); i++){
+				if (entradaIterada.getValue().get(i).equals(buscada)) {
 
-					String valorDevolver = entrada.getKey();
+					String valorDevolver = entradaIterada.getKey();
 					if (!listaDevolver.contains(valorDevolver))
 						listaDevolver.add(valorDevolver);
 				}
