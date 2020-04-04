@@ -10,7 +10,8 @@ import java.util.*;
  * En este caso se implementan funciones más avanzadas sobre la original.
  * 
  * @author bbaruque
- * @author Jorge Ruiz Gómez
+ * @author Jorge Ruiz
+ * @author Alejandro Ortega
  */
 
 public class TraductorAvanzado {
@@ -19,7 +20,7 @@ public class TraductorAvanzado {
 	 * Se deberá instanciar un mapa que contendrá las traducciones para realizar luego la consulta.
 	 * En este caso el mapa deberá implementarse como un multimapa para las operaciones avanzadas.
 	 */
-	private Map <String, List <String>> mapa = new HashMap<>();
+	private Map <String, List <String>> diccionario = new HashMap<>();
 
 	/**
 	 * Método que permite almacenar las diferentes traducciones dentro del Mapa
@@ -49,19 +50,19 @@ public class TraductorAvanzado {
 
 			//Si no se encuentra almacenada en el mapa:
 			List<String> listaSinonimosTraducidos;
-			if (!mapa.containsKey(idioma1[i])){
+			if (!diccionario.containsKey(idioma1[i])){
 				//Creamos una nueva lista y la añadimos al mapa con la lista como valor
 				listaSinonimosTraducidos = new LinkedList<>();
 			} else {//si existe la lista, la guardamos para modificarla más adelante
-				listaSinonimosTraducidos = mapa.get(idioma1[i]);
+				listaSinonimosTraducidos = diccionario.get(idioma1[i]);
 			}
 			//añadimos la nueva palabra a la lista y la guardamos junto a su clave.
 			listaSinonimosTraducidos.add(idioma2[i]);
-			mapa.put(idioma1[i], listaSinonimosTraducidos);
+			diccionario.put(idioma1[i], listaSinonimosTraducidos);
 		}
 
 
-		return this.mapa.size();
+		return this.diccionario.size();
 	}
 
 	/**
@@ -75,11 +76,10 @@ public class TraductorAvanzado {
 	 */
 	public List<String> buscaTraduccion(String buscada){
 
-		if (mapa.containsKey(buscada))
-			return this.mapa.get(buscada);
+		if (diccionario.containsKey(buscada))
+			return this.diccionario.get(buscada);
 		else
 			return buscaTraduccionInversa(buscada);
-
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class TraductorAvanzado {
 	private List<String> buscaTraduccionInversa (String buscada){
 		List <String> listaDevolver = new LinkedList<>();
 
-		for (Map.Entry<String, List<String>> entradaIterada : this.mapa.entrySet()){
+		for (Map.Entry<String, List<String>> entradaIterada : this.diccionario.entrySet()){
 			for (int i = 0; i < entradaIterada.getValue().size(); i++){
 				if (entradaIterada.getValue().get(i).equals(buscada)) {
 
@@ -116,11 +116,14 @@ public class TraductorAvanzado {
 	 */
 	public List<String> buscaSinonimos(String buscada){
 
+		//Buscamos todas las claves que contengan nuestra palabra
 		List <String> resultadosBusqeudaInversa = this.buscaTraduccionInversa(buscada);
+
 		List <String> listaSinonimos = new ArrayList<>();
-		
+
+		//Añadimos por cada clave todos sus valores
 		for (String sinonimo : resultadosBusqeudaInversa){
-			listaSinonimos.addAll(this.mapa.get(sinonimo));
+			listaSinonimos.addAll(this.diccionario.get(sinonimo));
 		}
 
 		//Eliminamos la palabra buscada ya que no forma parte de los sinónimos.
@@ -133,7 +136,7 @@ public class TraductorAvanzado {
 	 * Método que permite eliminar por completo todas las traducciones almacenadas.
 	 */
 	public void clear (){
-		mapa.clear();
+		diccionario.clear();
 	}
 
 }

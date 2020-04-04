@@ -8,16 +8,17 @@ import java.util.Map;
  * Clase que permite implementar un diccionario bilingüe para obtener 
  * la traducción de palabras entre dos idiomas empleando  alguna de las 
  * clases que implementan HashMap.
- * @author Jorge Ruiz Gómez
+
  * @author bbaruque
- *
+ * @author Jorge Ruiz
+ * @author Alejando Ortega
  */
 public class Traductor {
 
 	/**
 	 * Mapa que contendrá las traducciones para realizar luego la consulta.
 	 */
-	Map <String,String> mapa;
+	Map <String,String> diccionario;
 	/**
 	 * Método que permite almacenar las diferentes traducciones dentro del Mapa
 	 * creado para ello. Se pasan dos arrays de cadenas (del mismo tamaño), cada
@@ -39,15 +40,15 @@ public class Traductor {
 		else if (Arrays.equals(idioma1, idioma2))
 			return 0;
 
-		mapa = new HashMap<>(idioma1.length); //instanciamos el mapa con un tamaño fijo.
+		diccionario = new HashMap<>(idioma1.length); //instanciamos el mapa con un tamaño fijo.
 
 		for (int i = 0; i< idioma1.length; i++){
-			mapa.put(idioma1[i], idioma2[i]);
+			diccionario.put(idioma1[i], idioma2[i]);
 		}
 
 
 
-		return this.mapa.size();
+		return this.diccionario.size();
 	}
 
 	/**
@@ -65,7 +66,7 @@ public class Traductor {
 	public String buscaTraduccion(String buscada){
 		String traduccion;
 
-		traduccion=this.mapa.get(buscada);
+		traduccion=this.diccionario.get(buscada);
 
 		if ( traduccion == null )
 			return buscaTraduccionInversa(buscada);
@@ -79,10 +80,10 @@ public class Traductor {
 	 * @return el resultado o null si esta no se encuentra registrada en el traductor.
 	 */
 	private String buscaTraduccionInversa(String buscada){
-		if (!this.mapa.containsValue(buscada))
+		if (!this.diccionario.containsValue(buscada))
 			return null;
 
-		for ( Map.Entry <String,String> entrada : this.mapa.entrySet() ){
+		for ( Map.Entry <String,String> entrada : this.diccionario.entrySet() ){
 				if(buscada.equals(entrada.getValue())) //Si es el mismo valor, lo devolvemos
 					return entrada.getKey();
 		}
@@ -93,7 +94,7 @@ public class Traductor {
 	 * Método que permite eliminar por completo todas las traducciones almacenadas.
 	 */
 	public void clear (){
-		this.mapa.clear();
+		this.diccionario.clear();
 	}
 
 }

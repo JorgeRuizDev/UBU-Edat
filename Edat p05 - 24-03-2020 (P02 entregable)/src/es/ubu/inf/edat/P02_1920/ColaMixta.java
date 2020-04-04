@@ -18,6 +18,8 @@ public class ColaMixta<E> extends AbstractQueue<E> {
 	/*
 	 * Valor que indica el tamaño de cada nodo.
 	 */
+
+
 	private final int  tamañoNodo;
 
 	protected class NodoMixto extends AbstractQueue<E> {
@@ -39,7 +41,7 @@ public class ColaMixta<E> extends AbstractQueue<E> {
 		 * Constructor de la clase.
 		 */
 		public NodoMixto() {
-			contenido = new ArrayList<E>(tamañoNodo);
+			contenido = new ArrayList<>(tamañoNodo);
 		}
 
 		/**
@@ -65,7 +67,7 @@ public class ColaMixta<E> extends AbstractQueue<E> {
 		 */
 		@Override
 		public E poll() {
-			E devolver = null;
+			E devolver;
 			devolver = peek();
 			contenido.remove(0);
 			return devolver;
@@ -200,6 +202,9 @@ public class ColaMixta<E> extends AbstractQueue<E> {
 		this.tamañoNodo=tamañoNodo;
 		primero=new NodoMixto();
 		ultimo = primero;
+		
+
+
 	}
 
 	
@@ -213,12 +218,10 @@ public class ColaMixta<E> extends AbstractQueue<E> {
 		if (!isUltimoNodoLleno()) {
 			ultimo.offer(e);
 			return true;
-		} else if (isUltimoNodoLleno()) {
+		} else {
 			añadirNodoVacíoEnLaCola();
 			ultimo.offer(e);
 			return true;
-		} else {
-			return false;
 		}
 	}
 	
@@ -239,11 +242,11 @@ public class ColaMixta<E> extends AbstractQueue<E> {
 		return primero.poll();
 	}
 
-	@Override
 	/**
 	 * Método que muestra el primer elemento de la la cola.
 	 * @return elemento.
 	 */
+	@Override
 	public E peek() {
 		return primero.peek();
 	}
@@ -257,8 +260,8 @@ public class ColaMixta<E> extends AbstractQueue<E> {
 		
 		
 		NodoMixto nodo = primero; // Nodo en el que se encuentra el elemento
-		int nNodo = 0;		// El nº de nodo en el que se encuentra
-		int posicionEnNodo = -1;	//La posición en en la que se encuentra dentro del nodo.
+		int nNodo;		// El nº de nodo en el que se encuentra
+		int posicionEnNodo;	//La posición en en la que se encuentra dentro del nodo.
 		
 		
 		if ( index  % tamañoNodo == 0) 			//Traducimos el índice a nodo y índice de dicho nodo
