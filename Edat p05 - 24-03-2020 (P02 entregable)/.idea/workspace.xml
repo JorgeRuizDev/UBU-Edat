@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a573cdf6-3fd8-496a-b170-10e58e9e6135" name="Default Changelist" comment="" />
+    <list default="true" id="a573cdf6-3fd8-496a-b170-10e58e9e6135" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/es/ubu/inf/edat/P02_1920/ColaMixta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/es/ubu/inf/edat/P02_1920/ColaMixta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/es/ubu/inf/edat/P02_1920/ColaMixta.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Edat p06 - 30-03-2020/src/es/ubu/gii/edat/sesion06/TraductorAvanzado.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Edat p06 - 30-03-2020/src/es/ubu/gii/edat/sesion06/TraductorAvanzado.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,12 +34,19 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15136719" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.spelling" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.TestColaMixta">
     <configuration name="All in Edat p05 - 24-03-2020 (P02 entregable)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Edat p05 - 24-03-2020 (P02 entregable)" />
       <option name="PACKAGE_NAME" value="" />
@@ -43,8 +55,39 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestColaMixta" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Edat p05 - 24-03-2020 (P02 entregable)" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="es.ubu.inf.edat.P02_1920.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="es.ubu.inf.edat.P02_1920" />
+      <option name="MAIN_CLASS_NAME" value="es.ubu.inf.edat.P02_1920.TestColaMixta" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="tst.es.ubu.inf.edat.P02_1920 in Edat p05 - 24-03-2020 (P02 entregable)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Edat p05 - 24-03-2020 (P02 entregable)" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tst.es.ubu.inf.edat.P02_1920.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tst.es.ubu.inf.edat.P02_1920" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestColaMixta" />
+        <item itemvalue="JUnit.tst.es.ubu.inf.edat.P02_1920 in Edat p05 - 24-03-2020 (P02 entregable)" />
         <item itemvalue="JUnit.All in Edat p05 - 24-03-2020 (P02 entregable)" />
       </list>
     </recent_temporary>
@@ -95,46 +138,58 @@
     <option name="LAST_COMMIT_MESSAGE" value="Añadido javadoc + variables finales/constantes" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="711" y="390" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1585493731481">
+    <state x="552" y="182" key="#Project_Structure" timestamp="1585739214995">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="711" y="390" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585493731481" />
+    <state x="552" y="182" key="#Project_Structure/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585739214995" />
+    <state x="811" y="413" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1585660416565">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="811" y="413" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585660416565" />
+    <state x="711" y="390" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1585739512571">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="711" y="390" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585739512571" />
     <state x="390" y="119" key="CommitChangelistDialog2" timestamp="1585398158200">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="390" y="119" key="CommitChangelistDialog2/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585398158200" />
-    <state x="738" y="276" key="FileChooserDialogImpl" timestamp="1585582628633">
+    <state x="724" y="267" key="FileChooserDialogImpl" timestamp="1585739246767">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="738" y="276" key="FileChooserDialogImpl/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585582628633" />
-    <state width="1877" height="191" key="GridCell.Tab.0.bottom" timestamp="1585503486938">
+    <state x="724" y="267" key="FileChooserDialogImpl/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585739246767" />
+    <state width="1877" height="191" key="GridCell.Tab.0.bottom" timestamp="1585739643607">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="191" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585503486938" />
-    <state width="1877" height="191" key="GridCell.Tab.0.center" timestamp="1585503486938">
+    <state width="1877" height="191" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585739643607" />
+    <state width="1877" height="191" key="GridCell.Tab.0.center" timestamp="1585739643606">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="191" key="GridCell.Tab.0.center/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585503486938" />
-    <state width="1877" height="191" key="GridCell.Tab.0.left" timestamp="1585503486938">
+    <state width="1877" height="191" key="GridCell.Tab.0.center/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585739643606" />
+    <state width="1877" height="191" key="GridCell.Tab.0.left" timestamp="1585739643606">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="191" key="GridCell.Tab.0.left/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585503486938" />
-    <state width="1877" height="191" key="GridCell.Tab.0.right" timestamp="1585503486938">
+    <state width="1877" height="191" key="GridCell.Tab.0.left/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585739643606" />
+    <state width="1877" height="191" key="GridCell.Tab.0.right" timestamp="1585739643607">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="191" key="GridCell.Tab.0.right/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585503486938" />
-    <state x="461" y="163" key="SettingsEditor" timestamp="1585397032699">
+    <state width="1877" height="191" key="GridCell.Tab.0.right/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585739643607" />
+    <state x="461" y="163" key="SettingsEditor" timestamp="1585739233068">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="163" key="SettingsEditor/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585397032699" />
+    <state x="461" y="163" key="SettingsEditor/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585739233068" />
     <state x="552" y="257" key="Vcs.Push.Dialog.v2" timestamp="1585398161246">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="257" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585398161246" />
-    <state x="667" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1585582594458">
+    <state x="667" y="349" width="969" height="342" key="com.intellij.ide.util.TipDialog" timestamp="1586016130969">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="667" y="349" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585582594458" />
+    <state x="667" y="349" width="969" height="342" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1586016130969" />
+    <state x="685" y="487" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1585738715963">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="685" y="487" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585738715963" />
     <state x="771" y="440" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585397926998">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
