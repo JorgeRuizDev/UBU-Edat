@@ -114,7 +114,7 @@ public interface Table <R,C,V> {
 	 * @param columnKey clave de columna que se debe recuperar de la tabla
 	 * @return mapa correspondiente asociando las claves de fila a su valor
 	 */
-	public Map<R,V> column(C columnKey23);
+	public Map<R,V> column(C columnKey);
 
 	/**
 	 * Devuelve el contenido completo de la tabla en forma de una conjunto de tripletas de 
