@@ -1,2 +1,0 @@
-// TODO: Se pide al alumno implementar la clase "HashMapTable", implementando el interfaz "Table", incluido en este mismo paquete.
-// TODO: The student should implement class "HashMapTable" implementing the interface called "Table", included in this same package. 
