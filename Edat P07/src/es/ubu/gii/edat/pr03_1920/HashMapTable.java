@@ -3,7 +3,8 @@ package es.ubu.gii.edat.pr03_1920;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
+
+
 
 public class HashMapTable<R,C,V> implements Table{
 
@@ -144,15 +145,46 @@ public class HashMapTable<R,C,V> implements Table{
 		return null;
 	}
 
+	/**
+	 * Devuelve el valor correspondiente asociado a una determinada combinación de claves de fila
+	 * y de columna o null si no existe esa asociación.
+	 *
+	 * @param row Clave del fila de la asociación correspondiente al valor a recuperar
+	 * @param column Clave de columna de la asociación correspondiente al valor a recuperar
+	 * @return Valor asociado a las dos claves facilitadas o null si no existe esa asociación
+	 */
 	@Override
 	public Object get(Object row, Object column) {
-		// TODO Auto-generated method stub
-		return null;
+		Map filaTabla;
+
+		if (!principal.containsKey(row))
+			return null;
+
+		filaTabla = principal.get(row);
+
+		if (!filaTabla.containsKey(column))
+			return null;
+
+		//obtenemos la celda
+		HashMapCell <R,C,V> celda = (HashMapCell <R,C,V>) filaTabla.get(column);
+
+		return celda.getValue();
 	}
 
+	/**
+	 * Devuelve verdadero si la tabla contienen una asociación que incluya las claves de fila
+	 * y de columna que se especifican
+	 *
+	 * @param row Clave del fila de la asociación que se pretende consultar
+	 * @param column Clave de columna de la asociación que se pretende consultar
+	 * @return true si existe la asociacion y false en otro caso
+	 */
 	@Override
 	public boolean containsKeys(Object row, Object column) {
-		// TODO Auto-generated method stub
+		if (principal.containsKey(row)){
+			return principal.get(row).containsKey(column);
+		}
+
 		return false;
 	}
 
@@ -189,7 +221,6 @@ public class HashMapTable<R,C,V> implements Table{
 	@Override
 	public int size() {
 		int numCeldas = 0;
-
 		//Obtenemos el número de columnas ocupadas por cada fila.
 		for ( Map.Entry <R,Map<C,HashMapCell<R,C,V>>> fila : principal.entrySet()){
 			numCeldas += fila.getValue().size();
@@ -200,8 +231,8 @@ public class HashMapTable<R,C,V> implements Table{
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+
+		return this.size() == 0;
 	}
 
 	@Override
