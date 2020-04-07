@@ -257,9 +257,7 @@ public class HashMapTable<R,C,V> implements Table{
 	 */
 	@Override
 	public Collection<Table.Cell<R,C,V>> cellSet(){
-	//FIXME: No se si funciona. Debería, pero igual no jijijiji (No hay Test, igual hago uno)
 		List<Cell<R,C,V>> cellSet = new LinkedList <>();
-
 		for (Map.Entry <R,Map<C,HashMapCell<R,C,V>>> fila : principal.entrySet())
 		{//Iteramos sobre las filas.
 			Map <C,HashMapCell<R,C,V>> celdasEnLaFila = fila.getValue();
@@ -269,8 +267,7 @@ public class HashMapTable<R,C,V> implements Table{
 				cellSet.add(celda.getValue());
 			}
 		}
-		//System.out.println(cellSet.size());
-		return cellSet();
+		return cellSet;
 	}
 
 

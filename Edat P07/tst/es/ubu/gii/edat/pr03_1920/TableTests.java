@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import es.ubu.gii.edat.pr03_1920.HashMapTable;
 import es.ubu.gii.edat.pr03_1920.Table;
 
-public class TableTests {
+public class TableTests <R,C,V>{
 
 	Table<String,Integer,String> tabla;
 
@@ -168,12 +168,9 @@ public class TableTests {
 	}
 
 	@Test
-	public void  testCellSet() {
-		//FIXME: Este test lo he hcho yo
-		//Hay un bucle infinito en cellset()
+	public void testCellSet() {
 		testPut();
-		assertEquals("Contenido_1",tabla.get("1", 1));
-		System.out.println(tabla.cellSet().size());
+		assertEquals(tabla.cellSet().size(),tabla.size());
 	}
 
 }
