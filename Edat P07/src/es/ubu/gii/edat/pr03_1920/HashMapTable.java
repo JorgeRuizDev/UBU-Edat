@@ -15,8 +15,8 @@ public class HashMapTable<R,C,V> implements Table{
 	
 	/**
 	 * Clase Celda que guarda cada valor asociado a su fila y a su columna.
-	 * @author Alejandro Ortega  y Jorge Ruiz
-	 *
+	 * @author Alejandro Ortega
+	 * @author Jorge Ruiz
 	 * @param <R> Fila
 	 * @param <C> Columna
 	 * @param <V> Valor
@@ -40,8 +40,8 @@ public class HashMapTable<R,C,V> implements Table{
 		 
 		/**
 		 * Constructor que da valor inicial al la fila y a la columna.
-		 * @param row fila
-		 * @param column columna
+		 * @param row fila.
+		 * @param column columna.
 		 */
 		 public HashMapCell(R row, C column) {
 			 this.row = row;
@@ -53,7 +53,6 @@ public class HashMapTable<R,C,V> implements Table{
 		  */
 		@Override
 		public R getRowKey() {
-			
 			return row;
 		}
 
@@ -62,7 +61,6 @@ public class HashMapTable<R,C,V> implements Table{
 		 */
 		@Override
 		public C getColumnKey() {
-			
 			return column;
 		}
 
@@ -71,7 +69,6 @@ public class HashMapTable<R,C,V> implements Table{
 		 */
 		@Override
 		public V getValue() {
-			
 			return value;
 		}
 
@@ -86,7 +83,6 @@ public class HashMapTable<R,C,V> implements Table{
 				return (V) this.value;
 			}
 
-
 	}
 
 	/**
@@ -100,20 +96,33 @@ public class HashMapTable<R,C,V> implements Table{
 	 * Inserta un nuevo objeto de tipo HashMapCell en la tabla.
 	 * Primero comprueba si la fila ya se ha creado, si es asi, inserta la columna y la celda.
 	 * Si no ha sido creada la fila, la crea, e inserta la columna y el objeto celda.
+	 * @Param row Fila de la tabla.
+	 * @Param column Columna de la tabla.
+	 * @Param value Objeto a insertar en la tabla.
+	 *
+	 * @return null si la fila y columna estan vacías. El objeto que ha sido reemplazado si estaban ocupadas.
 	 */
 	@Override
 	public Object put(Object row, Object column, Object value) {
+
 		HashMapCell<R,C,V> celda = new HashMapCell((R) row, (C) column);
+
 		celda.setValue(value);
+
+		Object objetoAntiguo = null;
+		//Si existe la celda:
 		if(principal.containsKey((R) row)){
+
 			Map fila = (HashMap) principal.get(row);
-			fila.put(column, celda);
-		} else {
+			objetoAntiguo = fila.put(column, celda);
+		} else {//Si no existe la fila, la creamos
 			Map fila = new HashMap<C,HashMapCell>();
-			fila.put(column, celda);
 			principal.put(row, fila);
+			fila.put(column, celda);
+
 		}
-		return value;
+
+		return objetoAntiguo;
 	}
 
 	/**
@@ -122,6 +131,7 @@ public class HashMapTable<R,C,V> implements Table{
 	 */
 	@Override
 	public Object remove(Object row, Object column) {
+
 		if(principal.containsKey(row)) {
 			Map columna = (HashMap) principal.get(row);
 			if (columna.containsKey(column)) {
@@ -169,10 +179,18 @@ public class HashMapTable<R,C,V> implements Table{
 		return null;
 	}
 
+	/**
+	 * Devuelve el numero de asociaciones de clave de columna / clave de fila / valor que
+	 * se encuentran almacenadas en el mapa.
+	 *
+	 * @return numero de sociaciones almacenadas en el mapa.
+	 */
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+
+
+		
+		return principal.size();
 	}
 
 	@Override
