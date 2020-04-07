@@ -210,13 +210,36 @@ public class HashMapTable<R,C,V> implements Table{
 
 	@Override
 	public Map row(Object rowKey) {
-		return principal.get(rowKey);
+		Map<C,V> filas = new HashMap<C,V>();
+		Map<C,HashMapCell<R,C,V>> filaObtenida = new HashMap<C,HashMapCell<R,C,V>>();
+		filaObtenida = principal.get(rowKey);
+		
+		for (Map.Entry <C, HashMapCell <R,C,V >> celda : filaObtenida.entrySet() ) {
+			filas.put(celda.getKey(), celda.getValue().getValue());
+		}
+		
+	return filas;
+		
 	}
 
 	@Override
-	public Map column(Object columnKey) {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<R,V> column(Object columnKey) {
+		
+		Map<R,V> columna = new HashMap<R,V>();
+		
+		for (Map.Entry <R,Map<C,HashMapCell<R,C,V>>> fila : principal.entrySet())
+		{//Iteramos sobre las filas.
+			Map <C,HashMapCell<R,C,V>> celdasEnLaFila = fila.getValue();
+
+			for (Map.Entry <C, HashMapCell <R,C,V >> celda : celdasEnLaFila.entrySet() )
+			{//Iteramos sobre las columnas.
+				if ( celda.getValue().getColumnKey()==columnKey) {
+					columna.put(celda.getValue().getRowKey(), celda.getValue().getValue());
+				}
+			}
+		}
+		
+		return columna;
 	}
 
 
