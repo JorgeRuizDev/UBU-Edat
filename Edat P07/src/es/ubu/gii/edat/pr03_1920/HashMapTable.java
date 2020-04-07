@@ -3,14 +3,15 @@ package es.ubu.gii.edat.pr03_1920;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class HashMapTable<R,C,V> implements Table{
 
 	/**
 	 * Mapa principal que guarda todas las filas.
 	 */
-	private Map principal;
-	
+	private HashMap <R,Map<C,HashMapCell<R,C,V>>>  principal ;
+
 	
 	
 	/**
@@ -89,7 +90,7 @@ public class HashMapTable<R,C,V> implements Table{
 	 * Constructor que inicializa el mapa principal.
 	 */
 	public HashMapTable() {
-		principal = new HashMap<R,Map<C,HashMapCell<R,C,V>>>();
+		principal = new HashMap <> ();
 	}
 	
 	/**
@@ -117,7 +118,7 @@ public class HashMapTable<R,C,V> implements Table{
 			objetoAntiguo = fila.put(column, celda);
 		} else {//Si no existe la fila, la creamos
 			Map fila = new HashMap<C,HashMapCell>();
-			principal.put(row, fila);
+			principal.put((R) row, fila);
 			fila.put(column, celda);
 
 		}
@@ -187,10 +188,14 @@ public class HashMapTable<R,C,V> implements Table{
 	 */
 	@Override
 	public int size() {
+		int numCeldas = 0;
 
-
-		
-		return principal.size();
+		//Obtenemos el número de columnas ocupadas por cada fila.
+		for ( Map.Entry <R,Map<C,HashMapCell<R,C,V>>> fila : principal.entrySet()){
+			numCeldas += fila.getValue().size();
+		}
+		//Devolvemos el número de columnas
+		return numCeldas;
 	}
 
 	@Override
