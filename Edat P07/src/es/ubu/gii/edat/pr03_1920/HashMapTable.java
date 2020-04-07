@@ -190,7 +190,18 @@ public class HashMapTable<R,C,V> implements Table{
 
 	@Override
 	public boolean containsValue(Object value) {
-		// TODO Auto-generated method stub
+
+		for (Map.Entry <R,Map<C,HashMapCell<R,C,V>>> fila : principal.entrySet())
+		{//Iteramos sobre las filas
+			Map <C,HashMapCell<R,C,V>> celdasEnLaFila = fila.getValue();
+
+			for (Map.Entry <C, HashMapCell <R,C,V >> celda : celdasEnLaFila.entrySet() )
+			{
+				if ( celda.getValue().getValue().equals(value))
+					return true;
+			}
+		}
+
 		return false;
 	}
 
@@ -231,14 +242,12 @@ public class HashMapTable<R,C,V> implements Table{
 
 	@Override
 	public boolean isEmpty() {
-
 		return this.size() == 0;
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		principal.clear();
 	}
 	
 
