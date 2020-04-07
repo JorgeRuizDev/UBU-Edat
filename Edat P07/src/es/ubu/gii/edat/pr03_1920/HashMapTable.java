@@ -1,9 +1,6 @@
 package es.ubu.gii.edat.pr03_1920;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.*;
 
 
 public class HashMapTable<R,C,V> implements Table{
@@ -11,7 +8,7 @@ public class HashMapTable<R,C,V> implements Table{
 	/**
 	 * Mapa principal que guarda todas las filas.
 	 */
-	private HashMap <R,Map<C,HashMapCell<R,C,V>>>  principal ;
+	private final HashMap <R,Map<C,HashMapCell<R,C,V>>>  principal ;
 
 	
 	
@@ -28,12 +25,12 @@ public class HashMapTable<R,C,V> implements Table{
 		/**
 		 * Valor de la fila
 		 */
-		 private R row;
+		 private final R row;
 		 
 		 /**
 		  * Valor de la columna
 		  */
-		 private C column;
+		 private final C column;
 		 
 		 /**
 		  * Valor almacenado
@@ -83,8 +80,14 @@ public class HashMapTable<R,C,V> implements Table{
 			// TODO Mirar a ver que cojones pasa aqui
 				this.value = (V) value;
 				return (V) this.value;
-			}
+		}
 
+		@Override
+		public boolean equals(Object o){
+
+			//TODO: Implementar
+			return false;
+		}
 	}
 
 	/**
@@ -98,9 +101,9 @@ public class HashMapTable<R,C,V> implements Table{
 	 * Inserta un nuevo objeto de tipo HashMapCell en la tabla.
 	 * Primero comprueba si la fila ya se ha creado, si es asi, inserta la columna y la celda.
 	 * Si no ha sido creada la fila, la crea, e inserta la columna y el objeto celda.
-	 * @Param row Fila de la tabla.
-	 * @Param column Columna de la tabla.
-	 * @Param value Objeto a insertar en la tabla.
+	 * @param row Fila de la tabla.
+	 * @param column Columna de la tabla.
+	 * @param value Objeto a insertar en la tabla.
 	 *
 	 * @return null si la fila y columna estan vacías. El objeto que ha sido reemplazado si estaban ocupadas.
 	 */
@@ -192,11 +195,11 @@ public class HashMapTable<R,C,V> implements Table{
 	public boolean containsValue(Object value) {
 
 		for (Map.Entry <R,Map<C,HashMapCell<R,C,V>>> fila : principal.entrySet())
-		{//Iteramos sobre las filas
+		{//Iteramos sobre las filas.
 			Map <C,HashMapCell<R,C,V>> celdasEnLaFila = fila.getValue();
 
 			for (Map.Entry <C, HashMapCell <R,C,V >> celda : celdasEnLaFila.entrySet() )
-			{
+			{//Iteramos sobre las columnas.
 				if ( celda.getValue().getValue().equals(value))
 					return true;
 			}
@@ -207,8 +210,7 @@ public class HashMapTable<R,C,V> implements Table{
 
 	@Override
 	public Map row(Object rowKey) {
-		// TODO Auto-generated method stub
-		return null;
+		return principal.get(rowKey);
 	}
 
 	@Override
@@ -217,11 +219,37 @@ public class HashMapTable<R,C,V> implements Table{
 		return null;
 	}
 
+
+	/**
+	 * Devuelve el contenido completo de la tabla en forma de una conjunto de tripletas de
+	 * clave de fila / clave de columna / valor. Se tratará de una vista, por lo que los cambios sobre
+	 * los datos de la colección se realizarán también sobre los datos contenidos en la tabla.
+	 *
+	 * Cada una de las tripletas de datos se almacenará en una clase que implemente el interfaz
+	 * Table.Cell (incluido en este fichero).
+	 *
+	 * La colección de celdas no deberá soportar los metodos de add o addAll.
+	 *
+	 * @return contenido
+	 */
 	@Override
-	public Collection cellSet() {
-		// TODO Auto-generated method stub
-		return null;
+	public Collection<Table.Cell<R,C,V>> cellSet(){
+	//FIXME: No se si funciona. Debería, pero igual no jijijiji (No hay Test, igual hago uno)
+		List<Cell<R,C,V>> cellSet = new LinkedList <>();
+
+		for (Map.Entry <R,Map<C,HashMapCell<R,C,V>>> fila : principal.entrySet())
+		{//Iteramos sobre las filas.
+			Map <C,HashMapCell<R,C,V>> celdasEnLaFila = fila.getValue();
+
+			for (Map.Entry <C, HashMapCell <R,C,V >> celda : celdasEnLaFila.entrySet() )
+			{//Añadimos la celda correspondiente a fila-columna
+				cellSet.add(celda.getValue());
+			}
+		}
+		//System.out.println(cellSet.size());
+		return cellSet();
 	}
+
 
 	/**
 	 * Devuelve el numero de asociaciones de clave de columna / clave de fila / valor que

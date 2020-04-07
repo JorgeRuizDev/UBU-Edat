@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.AfterEach;
@@ -165,6 +166,14 @@ public class TableTests {
 		testPut();
 		assertFalse(tabla.isEmpty());
 	}
-	
+
+	@Test
+	public void  testCellSet() {
+		//FIXME: Este test lo he hcho yo
+		//Hay un bucle infinito en cellset()
+		testPut();
+		assertEquals("Contenido_1",tabla.get("1", 1));
+		System.out.println(tabla.cellSet().size());
+	}
 
 }

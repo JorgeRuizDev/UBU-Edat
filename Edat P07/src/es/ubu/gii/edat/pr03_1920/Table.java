@@ -151,10 +151,10 @@ public interface Table <R,C,V> {
 	/**
 	 * Elimina todas las asociaciones de datos incluidas en el mapa.
 	 */
-	void clear();
+	public void clear();
 
-// putAll????
-// Se puede poner alguno más del XXXXall para completar en dificultad
+	// putAll????
+	// Se puede poner alguno más del XXXXall para completar en dificultad
 
 	/**
 	 * 
