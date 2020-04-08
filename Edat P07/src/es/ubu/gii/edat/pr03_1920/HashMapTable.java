@@ -2,6 +2,17 @@ package es.ubu.gii.edat.pr03_1920;
 
 import java.util.*;
 
+/**
+ * Clase Tabla que guarda en un objeto Celda un valor.
+ * Este valor está indexado por una fila y una columna.
+ * @see HashMapCell
+ * @author Alejandro Ortega
+ * @author Jorge Ruiz
+ * @param <R> Fila.
+ * @param <C> Columna.
+ * @param <V> Valor.
+ *
+ */
 
 public class HashMapTable<R,C,V> implements Table <R,C,V> {
 
@@ -18,23 +29,23 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 	 * @param <C> Columna
 	 * @param <V> Valor
 	 */
-	public class HashMapCell<R,C,V> implements Table.Cell <R,C,V> {
+	public static class HashMapCell<R,C,V> implements Table.Cell <R,C,V> {
 
 		/**
 		 * Valor de la fila
 		 */
 		 private final R row;
-		 
+
 		 /**
 		  * Valor de la columna
 		  */
 		 private final C column;
-		 
+
 		 /**
 		  * Valor almacenado
 		  */
 		 private V value;
-		 
+
 		/**
 		 * Constructor que da valor inicial al la fila y a la columna.
 		 * @param row fila.
@@ -44,7 +55,7 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 			 this.row = row;
 			 this.column = column;
 		 }
-		
+
 		 /**
 		  * Devuelve la fila.
 		  */
@@ -79,6 +90,11 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 				return this.value;
 		}
 
+		/**
+		 * Método equals.
+		 * @param o Objeto a comparar
+		 * @return True o false.
+		 */
 		@Override
 		public boolean equals(Object o){
 			if (! (o.getClass() == this.value.getClass()))
@@ -108,7 +124,7 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 	@Override
 	public V put(R row, C column, V value) {
 
-		HashMapCell <R,C,V> celda = new HashMapCell <> (row, column);
+		HashMapCell <R,C,V> celda = new HashMapCell<>(row, column);
 		Map <C,HashMapCell <R,C,V>> fila;
 		celda.setValue(value);
 
@@ -208,6 +224,11 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 		return false;
 	}
 
+	/**
+	 * Método que devuelve una fila a partir de su clave correspondiente.
+	 * @param rowKey clave de fila que se debe recuperar de la tabla
+	 * @return fila.
+	 */
 	@Override
 	public Map <C,V> row(Object rowKey) {
 		Map<C,V> filas = new HashMap<>();
@@ -220,6 +241,12 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 	return filas;
 	}
 
+
+	/**
+	 * Método que devuelve una columna a partir de su índice.
+	 * @param columnKey clave de columna que se debe recuperar de la tabla
+	 * @return columna.
+	 */
 	@Override
 	public Map<R,V> column(Object columnKey) {
 		
