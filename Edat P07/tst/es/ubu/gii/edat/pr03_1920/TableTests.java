@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,9 +17,9 @@ import org.junit.jupiter.api.Test;
 import es.ubu.gii.edat.pr03_1920.HashMapTable;
 import es.ubu.gii.edat.pr03_1920.Table;
 
-public class TableTests <R,C,V>{
+public class TableTests{
 
-	Table<String,Integer,String> tabla;
+	Table <String,Integer,String> tabla;
 
 	@BeforeEach
 	public void setUp() throws Exception {
@@ -170,7 +172,19 @@ public class TableTests <R,C,V>{
 	@Test
 	public void testCellSet() {
 		testPut();
-		assertEquals(tabla.cellSet().size(),tabla.size());
+
+		Collection<Table.Cell<String, Integer, String>> cellSet = tabla.cellSet();
+
+		assertEquals(cellSet.size(), tabla.size());
+		//Para todos los elementos en la colección
+		boolean estanTodos = true;
+		for (Table.Cell <String, Integer, String> celda : cellSet) {
+			if (!tabla.containsValue(celda.getValue()))
+				estanTodos = false;
+		}
+
+		assertTrue(estanTodos);
+
 	}
 
 }

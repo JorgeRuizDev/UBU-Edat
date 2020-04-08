@@ -77,7 +77,6 @@ public class HashMapTable<R,C,V> implements Table{
 		 */
 		@Override
 		public V setValue(Object value) {
-			// TODO Mirar a ver que cojones pasa aqui
 				this.value = (V) value;
 				return (V) this.value;
 		}
@@ -217,9 +216,7 @@ public class HashMapTable<R,C,V> implements Table{
 		for (Map.Entry <C, HashMapCell <R,C,V >> celda : filaObtenida.entrySet() ) {
 			filas.put(celda.getKey(), celda.getValue().getValue());
 		}
-		
 	return filas;
-		
 	}
 
 	@Override
