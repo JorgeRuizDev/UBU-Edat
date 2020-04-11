@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import es.ubu.gii.edat.pr03_1920.HashMapTable;
+import es.ubu.gii.edat.pr03_1920.HashMapTable.HashMapCell;
 import es.ubu.gii.edat.pr03_1920.Table;
 
 public class TableTests{
@@ -184,7 +185,13 @@ public class TableTests{
 		}
 
 		assertTrue(estanTodos);
-
+		
+		for (Table.Cell <String, Integer, String> celda : cellSet) {
+			celda.setValue("Cambiado");
+		}
+		
+	
+		assertTrue(tabla.get(1, 1) == "Cambiado" );
 	}
 
 }
