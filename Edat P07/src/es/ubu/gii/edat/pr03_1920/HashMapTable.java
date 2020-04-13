@@ -19,17 +19,15 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 	/**
 	 * Mapa principal que guarda todas las filas.
 	 */
-	private final HashMap <R,Map<C,HashMapCell<R,C,V>>>  principal ;
+	private final HashMap <R,Map<C,HashMapCell>>  principal ;
 
 	/**
 	 * Clase Celda que guarda cada valor asociado a su fila y a su columna.
 	 * @author Alejandro Ortega
 	 * @author Jorge Ruiz
-	 * @param <R> Fila
-	 * @param <C> Columna
-	 * @param <V> Valor
+
 	 */
-	public static class HashMapCell<R,C,V> implements Table.Cell <R,C,V> {
+	public class HashMapCell implements Table.Cell <R, C, V> {
 
 		/**
 		 * Valor de la fila
@@ -86,8 +84,9 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 		 */
 		@Override
 		public V setValue(V value) {
-				this.value = value;
-				return this.value;
+			V oldValue = this.value;
+			this.value = value;
+			return oldValue;
 		}
 
 		/**
@@ -98,15 +97,12 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 		@Override
 		public boolean equals(Object o){
 			
-			if (o instanceof HashMapCell<?,?,?>) {
-				HashMapCell<R, C, V> hashMapCell = (HashMapCell<R,C,V>) o;
-				if (hashMapCell.getColumnKey() == this.column 
+			if (o instanceof Table.Cell) {
+				//Se ha comprobado en el if del bloque que sea seguro el cast.
+				@SuppressWarnings("unchecked") HashMapCell hashMapCell = (HashMapCell) o;
+				return hashMapCell.getColumnKey() == this.column
 						&& hashMapCell.getRowKey() == this.row
-						&& hashMapCell.getValue() == this.value) {
-					
-					return true;
-
-				}
+						&& hashMapCell.getValue() == this.value;
 					
 			}
 			
@@ -135,11 +131,11 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 	@Override
 	public V put(R row, C column, V value) {
 
-		HashMapCell <R,C,V> celda = new HashMapCell<>(row, column);
-		Map <C,HashMapCell <R,C,V>> fila;
+		HashMapCell celda = new HashMapCell (row, column);
+		Map <C,HashMapCell> fila;
 		celda.setValue(value);
 
-		HashMapCell <R,C,V>celdaAntigua = null;
+		HashMapCell celdaAntigua = null;
 		//Si existe la celda:
 		if(principal.containsKey(row)){
 			fila = principal.get(row);
@@ -148,7 +144,6 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 			fila = new HashMap<>();
 			principal.put(row, fila);
 			fila.put(column, celda);
-
 		}
 
 		if (celdaAntigua != null)
@@ -165,9 +160,9 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 	public V remove(R row, C column) {
 
 		if(principal.containsKey(row)) {
-			Map <C, HashMapCell<R,C,V>> columna = principal.get(row);
+			Map <C, HashMapCell> columna = principal.get(row);
 			if (columna.containsKey(column)) {
-			    HashMapCell <R,C,V> celda = columna.get(column);
+			    HashMapCell celda = columna.get(column);
 				columna.remove(column);
 				return celda.getValue();
 			}
@@ -185,7 +180,7 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 	 */
 	@Override
 	public V get(Object row, Object column) {
-		Map <C,HashMapCell <R,C,V>> filaTabla;
+		Map <C,HashMapCell> filaTabla;
 
 		if (!principal.containsKey( row))
 			return null;
@@ -196,7 +191,7 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 			return null;
 
 		//obtenemos la celda
-		HashMapCell <R,C,V> celda = filaTabla.get(column);
+		HashMapCell celda = filaTabla.get(column);
 
 		return celda.getValue();
 	}
@@ -221,11 +216,11 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 	@Override
 	public boolean containsValue(Object value) {
 
-		for (Map.Entry <R,Map<C,HashMapCell<R,C,V>>> fila : principal.entrySet())
+		for (Map.Entry <R,Map<C,HashMapCell>> fila : principal.entrySet())
 		{//Iteramos sobre las filas.
-			Map <C,HashMapCell<R,C,V>> celdasEnLaFila = fila.getValue();
+			Map <C,HashMapCell> celdasEnLaFila = fila.getValue();
 
-			for (Map.Entry <C, HashMapCell <R,C,V >> celda : celdasEnLaFila.entrySet() )
+			for (Map.Entry <C, HashMapCell> celda : celdasEnLaFila.entrySet() )
 			{//Iteramos sobre las columnas.
 				if ( celda.getValue().getValue().equals(value))
 					return true;
@@ -243,10 +238,10 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 	@Override
 	public Map <C,V> row(Object rowKey) {
 		Map<C,V> filas = new HashMap<>();
-		Map<C,HashMapCell<R,C,V>> filaObtenida;
+		Map<C,HashMapCell> filaObtenida;
 		filaObtenida = principal.get(rowKey);
 		
-		for (Map.Entry <C, HashMapCell <R,C,V >> celda : filaObtenida.entrySet() ) {
+		for (Map.Entry <C, HashMapCell> celda : filaObtenida.entrySet() ) {
 			filas.put(celda.getKey(), celda.getValue().getValue());
 		}
 	return filas;
@@ -263,11 +258,11 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 		
 		Map<R,V> columna = new HashMap<>();
 		
-		for (Map.Entry <R,Map<C,HashMapCell<R,C,V>>> fila : principal.entrySet())
+		for (Map.Entry <R,Map<C,HashMapCell>> fila : principal.entrySet())
 		{//Iteramos sobre las filas.
-			Map <C,HashMapCell<R,C,V>> celdasEnLaFila = fila.getValue();
+			Map <C,HashMapCell> celdasEnLaFila = fila.getValue();
 
-			for (Map.Entry <C, HashMapCell <R,C,V >> celda : celdasEnLaFila.entrySet() )
+			for (Map.Entry <C, HashMapCell> celda : celdasEnLaFila.entrySet() )
 			{//Iteramos sobre las columnas.
 				if ( celda.getValue().getColumnKey()==columnKey) {
 					columna.put(celda.getValue().getRowKey(), celda.getValue().getValue());
@@ -293,12 +288,12 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 	 */
 	@Override
 	public Collection<Table.Cell<R,C,V>> cellSet(){
-		Collection<Table.Cell<R,C,V>> cellSet = new LinkedList <Table.Cell<R,C,V>>();
-		for (Map.Entry <R,Map<C,HashMapCell<R,C,V>>> fila : principal.entrySet())
+		Collection<Table.Cell<R,C,V>> cellSet = new LinkedList<>();
+		for (Map.Entry <R,Map<C,HashMapCell>> fila : principal.entrySet())
 		{//Iteramos sobre las filas.
-			Map <C,HashMapCell<R,C,V>> celdasEnLaFila = fila.getValue();
+			Map <C,HashMapCell> celdasEnLaFila = fila.getValue();
 
-			for (Map.Entry <C, HashMapCell <R,C,V >> celda : celdasEnLaFila.entrySet() )
+			for (Map.Entry <C, HashMapCell> celda : celdasEnLaFila.entrySet() )
 			{//Añadimos la celda correspondiente a fila-columna
 				HashMapCell c = celda.getValue();
 				cellSet.add(c);
@@ -318,7 +313,7 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 	public int size() {
 		int numCeldas = 0;
 		//Obtenemos el número de columnas ocupadas por cada fila.
-		for ( Map.Entry <R,Map<C,HashMapCell<R,C,V>>> fila : principal.entrySet()){
+		for ( Map.Entry <R,Map<C,HashMapCell>> fila : principal.entrySet()){
 			numCeldas += fila.getValue().size();
 		}
 		//Devolvemos el número de columnas
