@@ -6,17 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import es.ubu.gii.edat.pr03_1920.HashMapTable;
-import es.ubu.gii.edat.pr03_1920.HashMapTable.HashMapCell;
-import es.ubu.gii.edat.pr03_1920.Table;
 
 public class TableTests{
 
@@ -185,13 +179,14 @@ public class TableTests{
 		}
 
 		assertTrue(estanTodos);
-		
-		for (Table.Cell <String, Integer, String> celda : cellSet) {
-			celda.setValue("Cambiado");
-		}
-		
+
+		Table.Cell<String, Integer, String> celda = cellSet.iterator().next();
+
+		String row = celda.getRowKey();
+		Integer col = celda.getColumnKey();
+		celda.setValue("Cambiado");
 	
-		assertTrue(tabla.get(1, 1) == "Cambiado" );
+		assertTrue(tabla.get(row, col).equals("Cambiado" ) );
 	}
 
 }

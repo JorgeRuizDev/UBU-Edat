@@ -121,7 +121,7 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 	public HashMapTable() {
 		principal = new HashMap <>();
 	}
-	
+
 	/**
 	 * Inserta un nuevo objeto de tipo HashMapCell en la tabla.
 	 * Primero comprueba si la fila ya se ha creado, si es asi, inserta la columna y la celda.
