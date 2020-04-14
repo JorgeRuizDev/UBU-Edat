@@ -153,10 +153,13 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 	}
 
 	/**
-	 * Metodo que elimina una celda.
-	 * Primero comprueba si existe la fila, y luego la columna.
+	 * Elimina la asociación entre las dos claves y su valor, si existía anteriormente.
+	 * Se eliminarán los 3 elementos de la tabla, no solo el valor.
+	 *
+	 * @param row Clave del fila de la asociación a ser eliminada
+	 * @param column Clave del columna de la asociación a ser eliminada
+	 * @return Valor previamente asociado a ambas claves o nulo si no existía esa asociación
 	 */
-	@Override
 	public V remove(R row, C column) {
 
 		if(principal.containsKey(row)) {
