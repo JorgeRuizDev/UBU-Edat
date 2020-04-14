@@ -291,7 +291,7 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 	 */
 	@Override
 	public Collection<Table.Cell<R,C,V>> cellSet(){
-		Collection<Table.Cell<R,C,V>> cellSet = new LinkedList<>();
+		Collection<Table.Cell<R,C,V>> cellSet = new HashSet<>();
 		for (Map.Entry <R,Map<C,HashMapCell>> fila : principal.entrySet())
 		{//Iteramos sobre las filas.
 			Map <C,HashMapCell> celdasEnLaFila = fila.getValue();
