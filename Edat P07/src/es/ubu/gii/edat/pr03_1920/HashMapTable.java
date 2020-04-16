@@ -109,6 +109,21 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 			return false;
 		}
 		
+		/**
+		 * Metodo HashCode
+		 * Utilizando la constante 1, aplicamos los hashcode de los atributos y los combinamos
+		 */
+		
+		@Override
+		public int hashCode() {
+			 //Inicializamos la constante
+			int valor = 1;
+			 valor = 31 * valor + row.hashCode();
+			 valor = 31 * valor + column.hashCode();
+			 
+			 return valor;
+		}
+		
 	}
 
 	/**
