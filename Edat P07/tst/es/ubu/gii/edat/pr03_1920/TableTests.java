@@ -185,8 +185,8 @@ public class TableTests{
 		String row = celda.getRowKey();
 		Integer col = celda.getColumnKey();
 		celda.setValue("Cambiado");
-	
-		assertTrue(tabla.get(row, col).equals("Cambiado" ) );
+
+		assertEquals("Cambiado", tabla.get(row, col));
 	}
 
 }

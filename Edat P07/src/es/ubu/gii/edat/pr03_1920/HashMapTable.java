@@ -306,18 +306,19 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 	 */
 	@Override
 	public Collection<Table.Cell<R,C,V>> cellSet(){
-		Collection<Table.Cell<R,C,V>> cellSet = new HashSet<>();
+		Set<Table.Cell<R,C,V>> cellSet = new HashSet<>();
+
 		for (Map.Entry <R,Map<C,HashMapCell>> fila : principal.entrySet())
 		{//Iteramos sobre las filas.
 			Map <C,HashMapCell> celdasEnLaFila = fila.getValue();
-
 			for (Map.Entry <C, HashMapCell> celda : celdasEnLaFila.entrySet() )
 			{//Añadimos la celda correspondiente a fila-columna
 				HashMapCell c = celda.getValue();
 				cellSet.add(c);
 			}
 		}
-		return cellSet;
+
+		return Collections.unmodifiableSet(cellSet);
 	}
 
 
@@ -338,11 +339,18 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 		return numCeldas;
 	}
 
+	/**
+	 * Comprueba si la tabla tiene elementos.
+	 * @return
+	 */
 	@Override
 	public boolean isEmpty() {
 		return this.size() == 0;
 	}
 
+	/**
+	 * Vacía el mapa de tablas. 
+	 */
 	@Override
 	public void clear() {
 		principal.clear();
