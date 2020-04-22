@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import es.ubu.gii.edat.sesion08.AccesoWeb;
-import es.ubu.gii.edat.sesion08.AccesoWeb.SeccionWeb;
+import es.ubu.gii.sesion08.data.AccesoWeb;
+import es.ubu.gii.sesion08.data.AccesoWeb.SeccionWeb;
 
 public class GeneradorAccesos implements Iterable<AccesoWeb>{
 

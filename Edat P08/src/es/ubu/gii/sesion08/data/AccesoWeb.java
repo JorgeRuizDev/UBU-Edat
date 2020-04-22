@@ -1,6 +1,7 @@
 package es.ubu.gii.sesion08.data;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class AccesoWeb implements Comparable<Object> {
 
@@ -49,7 +50,6 @@ public class AccesoWeb implements Comparable<Object> {
 		return s;
 	}
 
-	//////////////
 
 	@Override
 	public boolean equals(Object o) {
@@ -72,13 +72,24 @@ public class AccesoWeb implements Comparable<Object> {
 
 	@Override
 	public int hashCode() {
-		// TODO A completar por el estudiante
-		// TODO To be completed by the students
+		return Objects.hash(IP, fechaYHora, destino);
 	}
+
 
 	@Override
 	public int compareTo(Object o) {
-		// TODO A completar por el estudiante
-		// TODO To be completed by the students
+
+		if (this.equals(o))
+			return 0;
+
+		if (o instanceof AccesoWeb){
+			AccesoWeb acceso = (AccesoWeb) o;
+
+			//Comparamos las horas
+
+			return acceso.getFechaYHora().compareTo(this.getFechaYHora());
+		}
+
+		return 0; //para que no se añada a la lista.
 	}
 }

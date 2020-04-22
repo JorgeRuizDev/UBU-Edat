@@ -64,6 +64,7 @@ public class TextoPredictivo {
 
 		// TODO A completar por el estudiante
 		// TODO To be completed by the students
+		return null;
 
 	}
 
@@ -75,6 +76,7 @@ public class TextoPredictivo {
 	public int tamañoDiccionario() {
 		// TODO A completar por el estudiante
 		// TODO To be completed by the students
+		return 0;
 	}
 
 }

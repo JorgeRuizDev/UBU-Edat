@@ -12,7 +12,8 @@ import es.ubu.gii.sesion08.data.AccesoWeb;
  * funcionamiento depende principalmente de cómo se hayan definido los datos.
  * 
  * @author bbaruque
- *
+ * @author Jorge Ruiz
+ * @author Alejandro Ortega
  */
 public class FiltradoAccesosUnicos {
 
@@ -22,19 +23,37 @@ public class FiltradoAccesosUnicos {
 	 * método, se obtendrá un conjunto de accesos UNICOS. Se deberá emplear como
 	 * estructura de apoyo una HashSet.
 	 * 
-	 * @param logs Lista de listas de AccesoWeb
-	 * @return
+	 * @param logs Lista de listas de AccesoWeb.
+	 * @return HashSet con los accesos.
 	 */
 	public static HashSet<AccesoWeb> accesosUnicosDesordenados(Collection<? extends Collection<AccesoWeb>> logs) {
 
-		// TODO A completar por el estudiante
-		// TODO To be completed by the students
+		if (logs == null)
+			return null;
+
+		HashSet <AccesoWeb> set = new HashSet<>(logs.size());
+
+		//Volcamos cada lista de la lista de listas en el Set.
+		for (Collection <AccesoWeb> log : logs)
+			set.addAll(log);
+
+		return set;
 	}
 
 	public static TreeSet<AccesoWeb> accesosUnicosOrdenados(Collection<? extends Collection<AccesoWeb>> logs) {
 
-		// TODO A completar por el estudiante
-		// TODO To be completed by the students
+		if (logs == null)
+			return null;
+
+		TreeSet <AccesoWeb> set = new TreeSet <> ();
+
+		//Volcamos cada lista de la lista de listas en el Set.
+		for (Collection <AccesoWeb> log : logs)
+			set.addAll(log);
+
+		System.out.println(set.size());
+		return set;
 	}
+
 
 }
