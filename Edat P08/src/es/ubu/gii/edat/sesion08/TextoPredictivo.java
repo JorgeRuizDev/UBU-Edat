@@ -1,10 +1,6 @@
 package es.ubu.gii.edat.sesion08;
 
-import java.util.Deque;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.NavigableSet;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Clase que permite almacenar un tesauro de palabras en un deteminado idioma y
@@ -29,8 +25,7 @@ public class TextoPredictivo {
 	 * @param tesauro array de palabras que se van a emplear para corregir
 	 */
 	public TextoPredictivo(String[] tesauro) {
-		// TODO A completar por el estudiante
-		// TODO To be completed by the students
+		diccionario.addAll(Arrays.asList(tesauro));
 	}
 
 	/**
@@ -62,10 +57,37 @@ public class TextoPredictivo {
 	 */
 	public String[] sugiere(String incompleta, int numSugerencias) {
 
-		// TODO A completar por el estudiante
-		// TODO To be completed by the students
-		return null;
+		//Si la palabra es correcta. Devolvemos un array de tamaño 1
+		if (diccionario.contains(incompleta))
+			return new String [] {incompleta};
 
+
+		LinkedList <String> sugerencias = new LinkedList<>();
+
+		sugerencias.addFirst(diccionario.lower(incompleta));
+		sugerencias.addLast(diccionario.higher(incompleta));
+
+		while (sugerencias.size() < numSugerencias){
+			sugerencias.addFirst(diccionario.lower(sugerencias.getFirst()));
+			sugerencias.addLast(diccionario.higher(sugerencias.getLast()));
+
+			//Si se han acabado los valores, se añaden nulls en la tabla, que reemplazamos por el valor intermedio.
+			if (sugerencias.getFirst() == null)
+				sugerencias.set(0, sugerencias.get(sugerencias.size()/2) );
+			if (sugerencias.getLast() == null)
+				sugerencias.set(sugerencias.size() -1, sugerencias.get(sugerencias.size()/2) );
+
+		}
+
+
+		//Si es asimétrica, se quita una de la parte menor (izquierda)
+		if (numSugerencias %2 != 0){
+			sugerencias.removeFirst();
+		}
+
+
+		assert sugerencias.size() == numSugerencias : "Error en el tamaño del array";
+		return sugerencias.toArray(new String[numSugerencias]);
 	}
 
 	/**
@@ -74,9 +96,7 @@ public class TextoPredictivo {
 	 * @return numero de palabras DIFERENTES almacenadas en el tesauro
 	 */
 	public int tamañoDiccionario() {
-		// TODO A completar por el estudiante
-		// TODO To be completed by the students
-		return 0;
+		return this.diccionario.size();
 	}
 
 }

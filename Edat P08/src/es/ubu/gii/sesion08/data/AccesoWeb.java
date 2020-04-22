@@ -90,6 +90,6 @@ public class AccesoWeb implements Comparable<Object> {
 			return acceso.getFechaYHora().compareTo(this.getFechaYHora());
 		}
 
-		return 0; //para que no se añada a la lista.
+		return 0; //para que no se añada a el set.
 	}
 }

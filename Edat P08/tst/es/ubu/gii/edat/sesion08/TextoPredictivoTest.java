@@ -1,6 +1,7 @@
 package es.ubu.gii.edat.sesion08;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.After;
 import org.junit.Before;
@@ -32,6 +33,7 @@ public class TextoPredictivoTest {
 		String [] sugerencias;
 		
 		sugerencias = predictivo.sugiere("ba", 3);
+
 		assertEquals("ante",sugerencias[0]);
 		assertEquals("bajo",sugerencias[1]);
 		assertEquals("cabe",sugerencias[2]);
@@ -40,5 +42,28 @@ public class TextoPredictivoTest {
 		assertEquals("sin",sugerencias[0]);
 		assertEquals("sobre",sugerencias[1]);
 		assertEquals("tras",sugerencias[2]);
+
+		/* Tests propios
+		 * Para verificar el comportamiento.
+		 */
+
+		sugerencias = predictivo.sugiere("sob", 1);
+		assertEquals("sobre",sugerencias[0]);
+
+		sugerencias = predictivo.sugiere("sobre", 3);
+		assertEquals(sugerencias.length, 1);
+		assertEquals("sobre",sugerencias[0]);
+
+		sugerencias = predictivo.sugiere("si", 1);
+		assertEquals("sin",sugerencias[0]);
+
+
+		//está en el medio
+		sugerencias = predictivo.sugiere("si", 7);
+		assertEquals("sin",sugerencias[3]);
+
+		sugerencias = predictivo.sugiere("si", 30);
+		assertEquals("sin",sugerencias[15]);
+
 	}
 }
