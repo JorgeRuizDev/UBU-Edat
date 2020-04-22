@@ -341,7 +341,7 @@ public class HashMapTable<R,C,V> implements Table <R,C,V> {
 
 	/**
 	 * Comprueba si la tabla tiene elementos.
-	 * @return
+	 * @return entero.
 	 */
 	@Override
 	public boolean isEmpty() {
