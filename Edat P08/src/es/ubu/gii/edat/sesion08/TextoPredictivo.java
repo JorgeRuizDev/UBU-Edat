@@ -1,6 +1,9 @@
 package es.ubu.gii.edat.sesion08;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.NavigableSet;
+import java.util.TreeSet;
 
 /**
  * Clase que permite almacenar un tesauro de palabras en un deteminado idioma y
@@ -16,7 +19,7 @@ public class TextoPredictivo {
 	 * Se necesitará un atributo que permita Se empleará una clase que implemente el
 	 * interfaz Set
 	 */
-	private NavigableSet<String> diccionario = new TreeSet<String>();
+	private NavigableSet<String> diccionario = new TreeSet<>();
 
 	/**
 	 * Constructor de la clase. Se inicializa con el conjunto de palabras incluidas
@@ -64,10 +67,12 @@ public class TextoPredictivo {
 
 		LinkedList <String> sugerencias = new LinkedList<>();
 
+		//Cargamos los 2 primeros valores.
 		sugerencias.addFirst(diccionario.lower(incompleta));
-		sugerencias.addLast(diccionario.higher(incompleta));
+		sugerencias.addLast(diccionario.ceiling(incompleta));
 
-		while (sugerencias.size() < numSugerencias){
+		while (sugerencias.size() < numSugerencias)
+		{
 			sugerencias.addFirst(diccionario.lower(sugerencias.getFirst()));
 			sugerencias.addLast(diccionario.higher(sugerencias.getLast()));
 
@@ -79,12 +84,10 @@ public class TextoPredictivo {
 
 		}
 
-
 		//Si es asimétrica, se quita una de la parte menor (izquierda)
 		if (numSugerencias %2 != 0){
 			sugerencias.removeFirst();
 		}
-
 
 		assert sugerencias.size() == numSugerencias : "Error en el tamaño del array";
 		return sugerencias.toArray(new String[numSugerencias]);

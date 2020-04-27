@@ -40,6 +40,11 @@ public class FiltradoAccesosUnicos {
 		return set;
 	}
 
+	/**
+	 * Método que pasado una Colección de Colecciones de AccesoWeb, generar un treeSet ordenado (según la fecha.
+	 * @param logs Colección de colecciones de AccesoWeb.
+	 * @return TreeSet con accesoWeb únicos y ordenados.
+	 */
 	public static TreeSet<AccesoWeb> accesosUnicosOrdenados(Collection<? extends Collection<AccesoWeb>> logs) {
 
 		if (logs == null)
