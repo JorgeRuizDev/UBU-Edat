@@ -102,4 +102,5 @@ public class TextoPredictivo {
 		return this.diccionario.size();
 	}
 
+
 }

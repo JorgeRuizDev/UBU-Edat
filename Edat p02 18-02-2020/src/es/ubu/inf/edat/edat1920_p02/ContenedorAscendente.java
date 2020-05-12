@@ -58,7 +58,7 @@ public class ContenedorAscendente<E> extends AbstractCollection<E>{
 	 * @param contenido Array con el contenido genérico.
 	 * @param comparador Comparador de la clase.
 	 */
-	public ContenedorAscendente (E[] contenido, Comparator<E> comparador){
+	public ContenedorAscendente (E[] contenido, Comparator <E> comparador){
 		
 		this.contenido = contenido;
 		this.comparador = comparador;

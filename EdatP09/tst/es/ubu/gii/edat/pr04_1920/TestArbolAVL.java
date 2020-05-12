@@ -51,29 +51,28 @@ public class TestArbolAVL {
 
 	
 	@Test
-	public void rotacionIzquierdaDerecha (){
+	public void rotacionDerechaIzquierda(){
 		
-		datos = Arrays.asList(20,10,40,12);
+		datos = Arrays.asList(8,20,5,40);
 		arbol.addAll(datos);
-		
-		assertEquals(2,arbol.altura(20));
-		assertEquals(1,arbol.altura(10));
+	
+		assertEquals(2,arbol.altura(8));
+		assertEquals(1,arbol.altura(20));
+		assertEquals(0,arbol.altura(5));
 		assertEquals(0,arbol.altura(40));
-		assertEquals(0,arbol.altura(12));
 		assertEquals(4, arbol.size());
+	
+		arbol.add(30); // Se fuerza el reequilibrado
 		
-		arbol.add(11); // Se fuerza el reequilibrado
-		
-		assertEquals(2,arbol.altura(20));
-		assertEquals(1,arbol.altura(11));
-		assertEquals(0,arbol.altura(10));
+		assertEquals(2,arbol.altura(8));
+		assertEquals(1,arbol.altura(30));
 		assertEquals(0,arbol.altura(40));
-		assertEquals(0,arbol.altura(12));
+		assertEquals(0,arbol.altura(5));
+		assertEquals(0,arbol.altura(20));
 		assertEquals(5, arbol.size());
 		
 	}
 
-	
 	@Test
 	public void rotacionIzquierda(){
 		
@@ -99,28 +98,28 @@ public class TestArbolAVL {
 
 	
 	@Test
-	public void rotacionDerechaIzquierda(){
+	public void rotacionIzquierdaDerecha (){
 		
-		datos = Arrays.asList(8,20,5,40);
+		datos = Arrays.asList(20,10,40,8);
 		arbol.addAll(datos);
-
-		assertEquals(2,arbol.altura(8));
-		assertEquals(1,arbol.altura(20));
-		assertEquals(0,arbol.altura(5));
-		assertEquals(0,arbol.altura(40));
-		assertEquals(4, arbol.size());
-
-		arbol.add(30); // Se fuerza el reequilibrado
 		
-		assertEquals(2,arbol.altura(8));
-		assertEquals(1,arbol.altura(30));
+		assertEquals(2,arbol.altura(20));
+		assertEquals(1,arbol.altura(10));
 		assertEquals(0,arbol.altura(40));
-		assertEquals(0,arbol.altura(5));
-		assertEquals(0,arbol.altura(20));
+		assertEquals(0,arbol.altura(8));
+		assertEquals(4, arbol.size());
+		
+		arbol.add(9); // Se fuerza el reequilibrado
+		
+		assertEquals(2,arbol.altura(20));
+		assertEquals(1,arbol.altura(9));
+		assertEquals(0,arbol.altura(10));
+		assertEquals(0,arbol.altura(8));
+		assertEquals(0,arbol.altura(40));
 		assertEquals(5, arbol.size());
 		
 	}
-	
+
 	@Test
 	public void testProfundidad() {
 		
