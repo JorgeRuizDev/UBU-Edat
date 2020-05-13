@@ -232,9 +232,11 @@ public class ArbolBB<E> extends AbstractSet<E> {
 	 * La lista que devuelve contiene dos referencias a nodos: 
 	 * el primero es el nodo que contiene el dato buscado y (null si el dato no esta en el arbol)
 	 * el segundo corresponde al nodo del que cuelga (null si es la raiz).
-	 * 
+	 *
+	 * NOTA: Siempre tienen tamaño 2
+	 *
 	 * @param raiz del subarbol sobre el que se va a buscar 
-	 * @param buscado dato que se ppretende localizar
+	 * @param buscado dato que se pretende localizar
 	 * @return lista con referencias
 	 */
 	protected List<Nodo> buscar (Nodo raiz, E buscado){

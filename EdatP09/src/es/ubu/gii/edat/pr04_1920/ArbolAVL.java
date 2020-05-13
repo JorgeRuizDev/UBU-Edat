@@ -1,6 +1,9 @@
 package es.ubu.gii.edat.pr04_1920;
 
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class ArbolAVL<E> extends ArbolBB<E>{
 
@@ -10,7 +13,8 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 
 	@Override
 	public boolean add(E e){
-		// TODO - Sobreescribir para tener en cuenta el equilibrio del árbol		
+		// TODO - Sobreescribir para tener en cuenta el equilibrio del árbol
+		super.add(e);
 		return false;
 	}
 	
@@ -43,8 +47,15 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 	 * @return Lista con el contenido completo del arbol
 	 */
 	public List<E> preOrden() {
-		// TODO - A completar por el alumno 
-		// Solo se considerarán válidas las implementaciones ITERATIVAS
+		if (raiz == null) return null;
+
+		List <E> orden = new LinkedList<>();
+		Deque<E> pila = new LinkedList<>();
+
+		orden.add(raiz.getDato());
+
+		//TODO: Que los tests no pasarán hasta hacer las rotaciones.
+
 		return null;
 	}
 	
@@ -64,20 +75,38 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 	 * Altura dentro del arbol a la que se encuentra insertado el nodo que contiene 
 	 * un determinado dato pasado por parametro. En caso de que el dato no esté contenido
 	 * en el árbol, se devuelve el valor -1.
-	 * 
+	 *
+	 * Altura: camino más largo nodo-hoja.
+	 *
 	 * @param dato sobre el que se quiere calcular la altura
 	 * @return altura del nodo que contiene el dato (ver definición en teoria)
 	 */
 	public int altura(E dato){
-		// TODO - A completar por el alumno 
-		return -1;
+
+		return altura(this.buscar(this.raiz,dato).get(0));
+	}
+	public int altura(Nodo dato){
+
+		if (dato == null)
+			return -1;
+
+		int alturaIzq = this.altura(dato.getIzq());
+		int alturaDer = this.altura(dato.getDer());
+
+		if (alturaIzq > alturaDer)
+			return 1 + alturaIzq;
+		else
+			return 1 + alturaDer;
+
 	}
 
 	/**
 	 * Profundidad dentro del arbol a la que se encuentra insertado el nodo que contiene 
 	 * un determinado dato pasado por parametro. En caso de que el dato no esté contenido
 	 * en el árbol, se devuelve el valor -1.
-	 * 
+	 *
+	 * Profundidad: camino más largo raiz-nodo.
+	 *
 	 * @param dato sobre el que se quiere calcular la profundidad
 	 * @return profundidad del nodo que contiene el dato (ver definición en teoria)
 	 */
@@ -85,11 +114,36 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 		// TODO - A completar por el alumno
 		return -1;
 	}
-	
+
+
 
 	//TODO - Auxiliares RE-EQUILIBRADO
 	// Metodos que permiten realizar el re-equilibrado del árbol
+	private int alturaIzq(Nodo nodo){
+		return altura(nodo.getIzq()) + 1;
+	}
 
+	private int alturaDer(Nodo nodo){
+		return altura(nodo.getDer()) + 1;
+	}
+
+	/**
+	 * Método auxiliar que calcula el factor de desequilibrio del árbol.
+	 *
+	 * Tipos de return:
+	 * Positivo = El lado der es más largo.
+	 * Negativo = El lado izq es más largo.
+	 * 0 = Están equilibrados
+	 * abs(return) > 1 = Hay un desequlibrio
+	 * @return entero con signo.
+	 */
+	private int calcFactorDesequilibrio(){
+		return this.alturaDer(raiz) - this.alturaIzq(raiz);
+	}
+
+	private boolean hayDesequlibrio(){
+		return Math.abs(calcFactorDesequilibrio()) > 1;
+	}
 	// Se sugiere re-escribir el método de búsqueda del ArbolBB
 	
 }

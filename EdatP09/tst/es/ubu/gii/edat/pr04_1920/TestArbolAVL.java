@@ -27,6 +27,17 @@ public class TestArbolAVL {
 	}
 
 	@Test
+	public void testAlturaPersonal(){
+		//TEST PERSONAL, BORRAR/COMENTAR
+
+		datos = Arrays.asList(20,10,40,8,4);
+		arbol.addAll(datos);
+		System.out.println("Raiz: " + arbol.raiz.toString());
+		assertEquals(3,arbol.altura(20));
+	}
+
+
+	@Test
 	public void rotacionDerecha(){
 		
 		datos = Arrays.asList(20,10,40,8);
