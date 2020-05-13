@@ -13,9 +13,26 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 
 	@Override
 	public boolean add(E e){
-		// TODO - Sobreescribir para tener en cuenta el equilibrio del árbol
-		super.add(e);
-		return false;
+
+		boolean devolver = super.add(e);
+
+		if (devolver){
+
+			E raiz = (E) super.raiz;
+			do{
+
+				Nodo nodoAnterior = super.buscar(super.raiz,e).get(1);
+				if(nodoAnterior==null) {
+					break;
+				}
+				reequilibrioAVL(nodoAnterior);
+
+
+				e = nodoAnterior.getDato();
+			} while(true);
+		}
+
+		return devolver;
 	}
 	
 
@@ -125,8 +142,25 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 	 * @return profundidad del nodo que contiene el dato (ver definición en teoria)
 	 */
 	public int profundidad(E dato){
-		// TODO - A completar por el alumno
-		return -1;
+
+		//Nos posicionamos en la raiz
+		Nodo nodoActual = this.raiz;
+		int profundidad = 0;
+
+		//Mientras no estemos en el nodo con el dato, bajamos un puesto y sumamos uno a la profundidad
+		while (nodoActual.getDato() != dato){
+			profundidad++;
+			if(super.comparar(nodoActual.getDato(),dato)>0){
+				nodoActual = nodoActual.getIzq();
+			} else {
+				nodoActual = nodoActual.getDer();
+			}
+			//Si nos hemos salido del arbol y no hemos encontrado el elemento, devolvemos -1
+			if(nodoActual == null){
+				return -1;
+			}
+		}
+		return profundidad;
 	}
 
 
@@ -134,10 +168,16 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 	//TODO - Auxiliares RE-EQUILIBRADO
 	// Metodos que permiten realizar el re-equilibrado del árbol
 	private int alturaIzq(Nodo nodo){
+		if(nodo.getIzq()==null){
+			return 0;
+		}
 		return altura(nodo.getIzq()) + 1;
 	}
 
 	private int alturaDer(Nodo nodo){
+		if(nodo.getDer()==null){
+			return 0;
+		}
 		return altura(nodo.getDer()) + 1;
 	}
 
@@ -151,13 +191,120 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 	 * abs(return) > 1 = Hay un desequlibrio
 	 * @return entero con signo.
 	 */
-	private int calcFactorDesequilibrio(){
+	private int calcFactorDesequilibrio(Nodo raiz){
 		return this.alturaDer(raiz) - this.alturaIzq(raiz);
 	}
 
-	private boolean hayDesequlibrio(){
-		return Math.abs(calcFactorDesequilibrio()) > 1;
-	}
+
+
 	// Se sugiere re-escribir el método de búsqueda del ArbolBB
-	
+
+	private void rotacionIzquierda(Nodo nodoDesbalanceado){
+		List<Nodo> lista = super.buscar(super.raiz,nodoDesbalanceado.getDato());
+		Nodo nodoSuperior = lista.get(1);
+		Nodo nodoPivote = nodoDesbalanceado.getDer();
+		Nodo auxiliarIPivote = nodoPivote.getIzq();
+
+		//Hacemos el balanceo
+		nodoPivote.setIzq(nodoDesbalanceado);
+		nodoDesbalanceado.setDer(auxiliarIPivote);
+
+		//Cambiamos el nodo que apuntaba al desbalanceado
+		if(nodoSuperior.getIzq().equals(nodoDesbalanceado)){
+			nodoSuperior.setIzq(nodoPivote);
+		} else
+			nodoSuperior.setDer(nodoPivote);
+
+
+	}
+
+	private void rotacionDerecha(Nodo nodoDesbalanceado){
+		Nodo nodoSuperior = this.nodoAnterior(nodoDesbalanceado);
+		Nodo nodoPivote = nodoDesbalanceado.getIzq();
+		Nodo auxiliarPivote = nodoPivote.getDer();
+
+		//Hacemos el balanceo
+		nodoPivote.setDer(nodoDesbalanceado);
+		nodoDesbalanceado.setIzq(auxiliarPivote);
+
+		//Cambiamos el nodo que apuntaba al desbalanceado
+		if(nodoSuperior.getIzq().equals(nodoDesbalanceado)){
+			nodoSuperior.setIzq(nodoPivote);
+		} else
+			nodoSuperior.setDer(nodoPivote);
+	}
+
+
+	private void rotacionIzqDer(Nodo nodoDesbalanceado){
+
+		Nodo nodoSuperior = this.nodoAnterior(nodoDesbalanceado);
+		Nodo primerPivote = nodoDesbalanceado.getIzq();
+		Nodo segundoPivote = primerPivote.getDer();
+
+		//Hacemos el balanceo
+		nodoDesbalanceado.setDer(segundoPivote.getIzq());
+		primerPivote.setIzq(segundoPivote.getDer());
+
+		//Camiamos el nodo que apuntaba al desbalanceado
+		if(nodoSuperior.getIzq().equals(nodoDesbalanceado)){
+			nodoSuperior.setIzq(segundoPivote);
+		} else
+			nodoSuperior.setDer(segundoPivote);
+	}
+	private void rotacionDerIzq(Nodo nodoDesbalanceado){
+		Nodo nodoSuperior = this.nodoAnterior(nodoDesbalanceado);
+		Nodo primerPivote = nodoDesbalanceado.getDer();
+		Nodo segundoPivote = null;
+		if(primerPivote.getIzq()!=null) {
+			segundoPivote = primerPivote.getIzq();
+		}
+		//Hacemos el Balanceo
+		primerPivote.setIzq(segundoPivote.getDer());
+		nodoDesbalanceado.setDer(segundoPivote.getIzq());
+
+		segundoPivote.setIzq(nodoDesbalanceado);
+		segundoPivote.setDer(primerPivote);
+
+		//Cambiamos el nodo que apuntaba al desbalanceado
+		if(nodoSuperior.getIzq().equals(nodoDesbalanceado)){
+			nodoSuperior.setIzq(segundoPivote);
+		} else
+			nodoSuperior.setDer(segundoPivote);
+	}
+
+	private void reequilibrioAVL(Nodo raiz){
+		int desequilibrio = calcFactorDesequilibrio(raiz);
+		int desequilibrioIzq;
+		int desequilibrioDcha;
+
+		if(raiz.getIzq()==null){
+			 desequilibrioIzq=0;
+		} else {
+			 desequilibrioIzq = calcFactorDesequilibrio(raiz.getIzq());
+		}
+		if(raiz.getDer()==null){
+			desequilibrioDcha = 0;
+		} else {
+			desequilibrioDcha = calcFactorDesequilibrio(raiz.getDer());
+		}
+
+		if(desequilibrio == 2){
+			if(desequilibrioDcha == 1){
+				rotacionIzquierda(raiz);
+			} else if(desequilibrioDcha == -1){
+				rotacionDerIzq(raiz);
+			}
+		} else if(desequilibrio == -2){
+			if(desequilibrioIzq == -1){
+				rotacionDerecha(raiz);
+			} else if(desequilibrioIzq == 1){
+				rotacionIzqDer(raiz);
+			}
+		}
+	}
+
+	private Nodo nodoAnterior(Nodo nodo){
+		List <Nodo> lista = super.buscar(super.raiz, nodo.getDato());
+		return lista.get(1);
+	}
 }
