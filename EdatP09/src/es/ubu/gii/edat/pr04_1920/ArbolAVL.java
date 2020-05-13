@@ -1,9 +1,6 @@
 package es.ubu.gii.edat.pr04_1920;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class ArbolAVL<E> extends ArbolBB<E>{
 
@@ -19,17 +16,17 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 		if (devolver){
 
 			E raiz = (E) super.raiz;
+			boolean hayNodosSuperiores = true;
 			do{
-
 				Nodo nodoAnterior = super.buscar(super.raiz,e).get(1);
 				if(nodoAnterior==null) {
-					break;
+					hayNodosSuperiores = false;
 				}
-				reequilibrioAVL(nodoAnterior);
-
-
-				e = nodoAnterior.getDato();
-			} while(true);
+				else {
+					reequilibrioAVL(nodoAnterior);
+					e = nodoAnterior.getDato();
+				}
+			} while(hayNodosSuperiores);
 		}
 
 		return devolver;
@@ -52,9 +49,31 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 	 * @return Lista con el contenido completo del arbol
 	 */
 	public List<E> inOrden() {
-		// TODO - A completar por el alumno 
-		// Solo se considerarán válidas las implementaciones ITERATIVAS
-		return null;
+		if (raiz == null) return null;
+
+		List <E> orden = new LinkedList<>();
+		Deque <Nodo> pila = new LinkedList<>();
+
+		pila.offerLast(raiz);
+		Nodo nodoPrincipal = raiz;
+		HashMap <Nodo,Nodo> nodosVisitados = new HashMap<>();
+		//Estructura auxiliar que almacena el número de accesos de un nodo
+
+
+		while (! pila.isEmpty()){
+
+			if (nodoPrincipal != null){
+				pila.offerLast(nodoPrincipal);
+				nodoPrincipal = nodoPrincipal.getIzq();
+			}
+			else{
+				orden.add(pila.peekLast().getDato());
+				nodoPrincipal = pila.pollLast().getDer();
+			}
+		}
+
+		return orden;
+
 	}
 
 	/**
@@ -71,25 +90,27 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 
 		pila.add(raiz);
 
-		//TODO: Que los tests no pasarán hasta hacer las rotaciones.
-		//Está hecho con el pseudocódigo
-		while (pila.size() >0){
 
-			Nodo elemento = pila.pollLast();
+		//Está hecho con el pseudocódigo
+		while (! pila.isEmpty()){
+
+			Nodo nodoActual = pila.pollLast();
+			orden.add(nodoActual.getDato());
+
+			//primero el lado izquierdo
+			if (nodoActual.getDer() != null)
+				pila.add(nodoActual.getDer());
+
+			//luego el lado derecho
+			if (nodoActual.getIzq() != null)
+				pila.add(nodoActual.getIzq());
+
+
 		}
 
-		return null;
+		return orden;
 	}
 
-	//NO entiendo una mierda del pseudocódigo
-	public Nodo rotacionSimpleIzquierda (Nodo nodoParam){
-		Nodo izqNodoParam = nodoParam.getIzq();
-		Nodo PadreNodoParam = buscar(this.raiz,nodoParam.getDato()).get(1);
-
-		return null;
-	}
-
-	
 	/**
 	 * Devuelve la lista de elementos almacenados en el árbol en el
 	 * orden en el que aparecerían en un recorrido en posorden
