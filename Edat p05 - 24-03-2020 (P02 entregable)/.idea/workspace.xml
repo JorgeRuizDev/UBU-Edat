@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a573cdf6-3fd8-496a-b170-10e58e9e6135" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/es/ubu/inf/edat/P02_1920/ColaMixta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/es/ubu/inf/edat/P02_1920/ColaMixta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/es/ubu/inf/edat/P02_1920/ColaMixta.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Edat p06 - 30-03-2020/src/es/ubu/gii/edat/sesion06/TraductorAvanzado.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Edat p06 - 30-03-2020/src/es/ubu/gii/edat/sesion06/TraductorAvanzado.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,10 +179,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="257" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1585398161246" />
-    <state x="667" y="349" width="969" height="342" key="com.intellij.ide.util.TipDialog" timestamp="1586016130969">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="667" y="382" width="969" height="342" key="com.intellij.ide.util.TipDialog" timestamp="1588436528609">
+      <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="667" y="349" width="969" height="342" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.130.1366.728@0.0.1920.1040" timestamp="1586016130969" />
+    <state x="667" y="382" key="com.intellij.ide.util.TipDialog/0.30.1920.1050/1920.160.1366.738@0.30.1920.1050" timestamp="1588436528609" />
     <state x="685" y="487" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1585738715963">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -132,16 +132,24 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 		//Está hecho con el pseudocódigo
 		while (! pila.isEmpty()){
 
-			if (nodoPrincipal != null){
+			if (elementosIzquierda.containsKey(nodoPrincipal)){
 				pila.offerLast(nodoPrincipal);
 				elementosIzquierda.put(nodoPrincipal, null);
 				nodoPrincipal = nodoPrincipal.getIzq();
 
 			}
-			else{
+
+			if (elementosDerecha.containsKey(nodoPrincipal)){
 				elementosDerecha.put(nodoPrincipal, null);
-				nodoPrincipal = pila.pollLast().getDer();
+
 			}
+			if (elementosDerecha.containsKey(nodoPrincipal) && elementosDerecha.containsKey(nodoPrincipal)) {
+				orden.add(nodoPrincipal.getDato());
+				nodoPrincipal = pila.pollLast().getDer();
+
+			}
+			//Fixme loopInfinito, me voy alacamita, mañana itento terminarlo
+			break;
 		}
 
 		return orden;
