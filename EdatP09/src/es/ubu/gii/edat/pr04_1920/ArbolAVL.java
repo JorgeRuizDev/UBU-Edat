@@ -50,14 +50,28 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 		if (raiz == null) return null;
 
 		List <E> orden = new LinkedList<>();
-		Deque<E> pila = new LinkedList<>();
+		Deque<Nodo> pila = new LinkedList<>();
 
-		orden.add(raiz.getDato());
+		pila.add(raiz);
 
 		//TODO: Que los tests no pasarán hasta hacer las rotaciones.
+		//Está hecho con el pseudocódigo
+		while (pila.size() >0){
+
+			Nodo elemento = pila.pollLast();
+		}
 
 		return null;
 	}
+
+	//NO entiendo una mierda del pseudocódigo
+	public Nodo rotacionSimpleIzquierda (Nodo nodoParam){
+		Nodo izqNodoParam = nodoParam.getIzq();
+		Nodo PadreNodoParam = buscar(this.raiz,nodoParam.getDato()).get(1);
+
+		return null;
+	}
+
 	
 	/**
 	 * Devuelve la lista de elementos almacenados en el árbol en el
