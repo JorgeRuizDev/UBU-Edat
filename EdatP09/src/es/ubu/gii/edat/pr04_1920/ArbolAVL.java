@@ -118,9 +118,33 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 	 * @return Lista con el contenido completo del arbol
 	 */
 	public List<E> posOrden() {
-		// TODO - A completar por el alumno 
-		// Solo se considerarán válidas las implementaciones ITERATIVAS
-		return null;
+		if (raiz == null) return null;
+
+		List <E> orden = new LinkedList<>();
+		Deque<Nodo> pila = new LinkedList<>();
+
+		pila.add(raiz);
+
+		HashMap <Nodo,Nodo> elementosIzquierda = new HashMap<>();
+		HashMap <Nodo,Nodo> elementosDerecha = new HashMap<>();
+		Nodo nodoPrincipal = raiz;
+
+		//Está hecho con el pseudocódigo
+		while (! pila.isEmpty()){
+
+			if (nodoPrincipal != null){
+				pila.offerLast(nodoPrincipal);
+				elementosIzquierda.put(nodoPrincipal, null);
+				nodoPrincipal = nodoPrincipal.getIzq();
+
+			}
+			else{
+				elementosDerecha.put(nodoPrincipal, null);
+				nodoPrincipal = pila.pollLast().getDer();
+			}
+		}
+
+		return orden;
 	}
 	
 	/**
