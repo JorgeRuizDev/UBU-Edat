@@ -56,7 +56,7 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 
 		pila.offerLast(raiz);
 		Nodo nodoPrincipal = raiz;
-		HashMap <Nodo,Nodo> nodosVisitados = new HashMap<>();
+
 		//Estructura auxiliar que almacena el número de accesos de un nodo
 
 
@@ -127,32 +127,54 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 
 		HashMap <Nodo,Nodo> elementosIzquierda = new HashMap<>();
 		HashMap <Nodo,Nodo> elementosDerecha = new HashMap<>();
-		Nodo nodoPrincipal = raiz;
 
-		//Está hecho con el pseudocódigo
-		while (! pila.isEmpty()){
+		Nodo nodoPrincipal = raiz, nodoAnterior = raiz;
 
-			if (elementosIzquierda.containsKey(nodoPrincipal)){
+
+		while (!pila.isEmpty()){
+
+			//Vamos hacia la izquierda
+			if (!elementosIzquierda.containsKey(nodoPrincipal)){
 				pila.offerLast(nodoPrincipal);
-				elementosIzquierda.put(nodoPrincipal, null);
+				elementosIzquierda.put(nodoPrincipal,nodoPrincipal);
+				nodoAnterior = nodoPrincipal;
 				nodoPrincipal = nodoPrincipal.getIzq();
 
+				//Si la izquierda está vacía, retrocedemos
+				if(nodoPrincipal == null)
+					nodoPrincipal = pila.pollLast();
+
 			}
 
-			if (elementosDerecha.containsKey(nodoPrincipal)){
-				elementosDerecha.put(nodoPrincipal, null);
+			if (elementosIzquierda.containsKey(nodoPrincipal) &&
+					!elementosDerecha.containsKey(nodoPrincipal)){
+				pila.offerLast(nodoPrincipal);
+				elementosDerecha.put(nodoPrincipal,nodoPrincipal);
+				nodoAnterior=nodoPrincipal;
+				nodoPrincipal = nodoPrincipal.getDer();
+
+				//Si la derecha está vacía, retrocedemos
+				if(nodoPrincipal == null)
+					nodoPrincipal = pila.pollLast();
 
 			}
-			if (elementosDerecha.containsKey(nodoPrincipal) && elementosDerecha.containsKey(nodoPrincipal)) {
+
+			//Si ya se han visitado ambos lado de un nodo
+			if (elementosIzquierda.containsKey(nodoPrincipal) &&
+					elementosDerecha.containsKey(nodoPrincipal)){
+
+				assert nodoPrincipal != null;
 				orden.add(nodoPrincipal.getDato());
-				nodoPrincipal = pila.pollLast().getDer();
+				nodoPrincipal=pila.pollLast();
 
 			}
-			//Fixme loopInfinito, me voy alacamita, mañana itento terminarlo
-			break;
-		}
 
+		}
+		System.out.println("The end");
+		System.out.println(orden);
 		return orden;
+
+
 	}
 	
 	/**
@@ -166,7 +188,6 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 	 * @return altura del nodo que contiene el dato (ver definición en teoria)
 	 */
 	public int altura(E dato){
-
 		return altura(this.buscar(this.raiz,dato).get(0));
 	}
 	public int altura(Nodo dato){
@@ -397,5 +418,8 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 	private Nodo nodoAnterior(Nodo nodo){
 		List <Nodo> lista = super.buscar(super.raiz, nodo.getDato());
 		return lista.get(1);
+
 	}
+
 }
+
