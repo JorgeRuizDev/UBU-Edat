@@ -15,7 +15,6 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 
 		if (devolver){
 
-			E raiz = (E) super.raiz;
 			boolean hayNodosSuperiores = true;
 			do{
 				Nodo nodoAnterior = super.buscar(super.raiz,e).get(1);
@@ -36,7 +35,7 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 	@Override
 	public boolean remove(Object o){
 
-		/*
+
 		E datoBorrar;
 
 		try{
@@ -45,25 +44,20 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 			return false;
 		}
 
-		List<Nodo> nodoBorrar = buscar(this.raiz,datoBorrar);
-
-		if(nodoBorrar.get(0) == null) // Si el elemento no esta presente
-			return false;
-
-		if (esHoja(nodoBorrar.get(0))){
-			//Si es una hoja, borramos el valor izquierdo o derecho del padre, dependiendo del dato
-			if (comparar(nodoBorrar.get(1).getDato(),datoBorrar) < 0 )
-				nodoBorrar.get(1).setIzq(null);
-			else
-				nodoBorrar.get(1).setDer(null);
-			numElementos--;
-		}
-
-		return false;
-		 */
 		boolean hayCambios = super.remove(o);
 		if (hayCambios){
-			this.reequilibrioAVL(this.raiz);
+
+			boolean hayNodosSuperiores = true;
+			do{
+				Nodo nodoAnterior = super.buscar(super.raiz,datoBorrar).get(1);
+				if(nodoAnterior==null) {
+					hayNodosSuperiores = false;
+				}
+				else {
+					reequilibrioAVL(nodoAnterior);
+					datoBorrar = nodoAnterior.getDato();
+				}
+			} while(hayNodosSuperiores);
 		}
 		return (hayCambios);
 	}
@@ -438,6 +432,7 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 		List <Nodo> lista = super.buscar(super.raiz, nodo.getDato());
 		return lista.get(1);
 	}
+
 
 	private boolean esHoja (Nodo nodo){
 		return nodo.getDer() == null && nodo.getIzq() == null;
