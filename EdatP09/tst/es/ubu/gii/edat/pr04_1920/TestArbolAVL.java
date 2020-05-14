@@ -28,12 +28,40 @@ public class TestArbolAVL {
 
 	@Test
 	public void testAlturaPersonal(){
-		//TEST PERSONAL, BORRAR/COMENTAR
 
 		datos = Arrays.asList(20,10,40,8,4);
 		arbol.addAll(datos);
 		assertEquals(0,arbol.altura(4));
 		assertEquals(2,arbol.altura(20));
+	}
+
+	@Test
+	public void testRemovePersonal(){
+
+		datos = Arrays.asList(20,10,40,8,4);
+		arbol.addAll(datos);
+
+		arbol.remove(8);
+		assertEquals(0, arbol.altura(10));
+		assertEquals(1, arbol.altura(4));
+		assertEquals(0, arbol.altura(40));
+		assertEquals(2, arbol.altura(20));
+
+		assertEquals(arbol.size() , datos.size() - 1 );
+
+		arbol.add(2);
+		assertEquals(0, arbol.altura(2));
+		assertEquals(0, arbol.altura(10));
+		assertEquals(0, arbol.altura(40));
+		arbol.remove(40);
+
+		assertEquals(arbol.size() , datos.size() - 1 );
+		assertEquals(0, arbol.altura(10));
+		assertEquals(0, arbol.altura(2));
+		assertEquals(1, arbol.altura(20));
+		assertEquals(2, arbol.altura(4));
+
+		//añadir Iterador por aquí abajo para comprobar recorrido
 	}
 
 

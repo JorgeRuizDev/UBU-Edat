@@ -35,8 +35,37 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 
 	@Override
 	public boolean remove(Object o){
-		// TODO - Sobreescribir para tener en cuenta el equilibrio del árbol
+
+		/*
+		E datoBorrar;
+
+		try{
+			datoBorrar = (E) o;
+		}catch(ClassCastException cce){
+			return false;
+		}
+
+		List<Nodo> nodoBorrar = buscar(this.raiz,datoBorrar);
+
+		if(nodoBorrar.get(0) == null) // Si el elemento no esta presente
+			return false;
+
+		if (esHoja(nodoBorrar.get(0))){
+			//Si es una hoja, borramos el valor izquierdo o derecho del padre, dependiendo del dato
+			if (comparar(nodoBorrar.get(1).getDato(),datoBorrar) < 0 )
+				nodoBorrar.get(1).setIzq(null);
+			else
+				nodoBorrar.get(1).setDer(null);
+			numElementos--;
+		}
+
 		return false;
+		 */
+		boolean hayCambios = super.remove(o);
+		if (hayCambios){
+			this.reequilibrioAVL(this.raiz);
+		}
+		return (hayCambios);
 	}
 
 	////// Métodos solicitados que NO se incluyen en AbstractSet //////
@@ -128,7 +157,7 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 		HashMap <Nodo,Nodo> elementosIzquierda = new HashMap<>();
 		HashMap <Nodo,Nodo> elementosDerecha = new HashMap<>();
 
-		Nodo nodoPrincipal = raiz, nodoAnterior = raiz;
+		Nodo nodoPrincipal = raiz;
 
 
 		while (!pila.isEmpty()){
@@ -137,44 +166,36 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 			if (!elementosIzquierda.containsKey(nodoPrincipal)){
 				pila.offerLast(nodoPrincipal);
 				elementosIzquierda.put(nodoPrincipal,nodoPrincipal);
-				nodoAnterior = nodoPrincipal;
+
 				nodoPrincipal = nodoPrincipal.getIzq();
 
 				//Si la izquierda está vacía, retrocedemos
 				if(nodoPrincipal == null)
 					nodoPrincipal = pila.pollLast();
-
 			}
-
+			//Vamos hacia la derecha una vez hemos ido hacia la izquierda
 			if (elementosIzquierda.containsKey(nodoPrincipal) &&
 					!elementosDerecha.containsKey(nodoPrincipal)){
 				pila.offerLast(nodoPrincipal);
 				elementosDerecha.put(nodoPrincipal,nodoPrincipal);
-				nodoAnterior=nodoPrincipal;
+
 				nodoPrincipal = nodoPrincipal.getDer();
 
 				//Si la derecha está vacía, retrocedemos
 				if(nodoPrincipal == null)
 					nodoPrincipal = pila.pollLast();
-
 			}
 
-			//Si ya se han visitado ambos lado de un nodo
+			//Si ya se han visitado ambos lados de un nodo, se saca su valor
 			if (elementosIzquierda.containsKey(nodoPrincipal) &&
 					elementosDerecha.containsKey(nodoPrincipal)){
-
 				assert nodoPrincipal != null;
 				orden.add(nodoPrincipal.getDato());
 				nodoPrincipal=pila.pollLast();
-
 			}
-
 		}
-		System.out.println("The end");
-		System.out.println(orden);
+
 		return orden;
-
-
 	}
 	
 	/**
@@ -413,13 +434,13 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 		}
 	}
 
-
-
 	private Nodo nodoAnterior(Nodo nodo){
 		List <Nodo> lista = super.buscar(super.raiz, nodo.getDato());
 		return lista.get(1);
-
 	}
 
+	private boolean esHoja (Nodo nodo){
+		return nodo.getDer() == null && nodo.getIzq() == null;
+	}
 }
 

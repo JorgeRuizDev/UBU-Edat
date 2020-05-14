@@ -23,7 +23,7 @@ public class ArbolBB<E> extends AbstractSet<E> {
 	 * @author bbaruque
 	 *
 	 */
-	public class Nodo {      
+	public class Nodo {
 		/**
 		 * Dato incluido en el nodo
 		 */
