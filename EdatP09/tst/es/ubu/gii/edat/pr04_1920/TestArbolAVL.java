@@ -32,7 +32,8 @@ public class TestArbolAVL {
 
 		datos = Arrays.asList(20,10,40,8,4);
 		arbol.addAll(datos);
-		//assertEquals(3,arbol.altura(20));
+		assertEquals(0,arbol.altura(4));
+		assertEquals(2,arbol.altura(20));
 	}
 
 

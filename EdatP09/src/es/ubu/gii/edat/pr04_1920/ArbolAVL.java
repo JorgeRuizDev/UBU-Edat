@@ -173,6 +173,9 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 
 		if (dato == null)
 			return -1;
+		if (dato.getIzq()==null & dato.getDer()==null){
+			return 0;
+		}
 
 		int alturaIzq = this.altura(dato.getIzq());
 		int alturaDer = this.altura(dato.getDer());
@@ -252,6 +255,12 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 
 	// Se sugiere re-escribir el método de búsqueda del ArbolBB
 
+	/**
+	 * Metodo que rota un subArbol a la izquierda, dada la
+	 * raiz de dicho subArbol
+	 *
+	 * @param nodoDesbalanceado Raiz del subArbol desbalanceado
+	*/
 	private void rotacionIzquierda(Nodo nodoDesbalanceado){
 		List<Nodo> lista = super.buscar(super.raiz,nodoDesbalanceado.getDato());
 		Nodo nodoSuperior = lista.get(1);
@@ -271,6 +280,12 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 
 	}
 
+	/**
+	 * Metodo que rota un subArbol a la derecha, dada la
+	 * raiz de dicho subArbol
+	 *
+	 * @param nodoDesbalanceado Raiz del subArbol desbalanceado
+	 */
 	private void rotacionDerecha(Nodo nodoDesbalanceado){
 		Nodo nodoSuperior = this.nodoAnterior(nodoDesbalanceado);
 		Nodo nodoPivote = nodoDesbalanceado.getIzq();
@@ -287,7 +302,12 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 			nodoSuperior.setDer(nodoPivote);
 	}
 
-
+	/**
+	 * Metodo que rota un subArbol con una rotacion compuesta
+	 * izquierda-Derecha, dada la raiz de dicho subArbol
+	 *
+	 * @param nodoDesbalanceado Raiz del subArbol desbalanceado
+	 */
 	private void rotacionIzqDer(Nodo nodoDesbalanceado){
 
 		Nodo nodoSuperior = this.nodoAnterior(nodoDesbalanceado);
@@ -295,8 +315,11 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 		Nodo segundoPivote = primerPivote.getDer();
 
 		//Hacemos el balanceo
-		nodoDesbalanceado.setDer(segundoPivote.getIzq());
-		primerPivote.setIzq(segundoPivote.getDer());
+		nodoDesbalanceado.setIzq(segundoPivote.getDer());
+		primerPivote.setDer(segundoPivote.getIzq());
+
+		segundoPivote.setIzq(primerPivote);
+		segundoPivote.setDer(nodoDesbalanceado);
 
 		//Camiamos el nodo que apuntaba al desbalanceado
 		if(nodoSuperior.getIzq().equals(nodoDesbalanceado)){
@@ -304,6 +327,13 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 		} else
 			nodoSuperior.setDer(segundoPivote);
 	}
+
+	/**
+	 * Metodo que rota un subArbol con una rotacion compuesta
+	 * derecha-izquierda, dada la raiz de dicho subArbol
+	 *
+	 * @param nodoDesbalanceado Raiz del subArbol desbalanceado
+	 */
 	private void rotacionDerIzq(Nodo nodoDesbalanceado){
 		Nodo nodoSuperior = this.nodoAnterior(nodoDesbalanceado);
 		Nodo primerPivote = nodoDesbalanceado.getDer();
@@ -325,6 +355,12 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 			nodoSuperior.setDer(segundoPivote);
 	}
 
+
+	/**
+	 * Metodo que comprueba si, dada la raiz de un subArbol, ese
+	 * subArbol esta desbalanceado, y que clase de rotacion necesita
+	 * @param raiz raiz del subArbol
+	 */
 	private void reequilibrioAVL(Nodo raiz){
 		int desequilibrio = calcFactorDesequilibrio(raiz);
 		int desequilibrioIzq;
@@ -355,6 +391,8 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 			}
 		}
 	}
+
+
 
 	private Nodo nodoAnterior(Nodo nodo){
 		List <Nodo> lista = super.buscar(super.raiz, nodo.getDato());
