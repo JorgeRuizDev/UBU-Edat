@@ -298,8 +298,7 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 	 * @param nodoDesbalanceado Raiz del subArbol desbalanceado
 	*/
 	private void rotacionIzquierda(Nodo nodoDesbalanceado){
-		List<Nodo> lista = super.buscar(super.raiz,nodoDesbalanceado.getDato());
-		Nodo nodoSuperior = lista.get(1);
+		Nodo nodoSuperior = this.nodoAnterior(nodoDesbalanceado);
 		Nodo nodoPivote = nodoDesbalanceado.getDer();
 		Nodo auxiliarIPivote = nodoPivote.getIzq();
 
@@ -308,11 +307,15 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 		nodoDesbalanceado.setDer(auxiliarIPivote);
 
 		//Cambiamos el nodo que apuntaba al desbalanceado
-		if(nodoSuperior.getIzq().equals(nodoDesbalanceado)){
-			nodoSuperior.setIzq(nodoPivote);
-		} else
-			nodoSuperior.setDer(nodoPivote);
+		//Comprobamos si la rotacion se esta haciendo en la raiz
+		if(nodoSuperior!=null) {
+			if (nodoSuperior.getIzq().equals(nodoDesbalanceado)) {
+				nodoSuperior.setIzq(nodoPivote);
+			} else
+				nodoSuperior.setDer(nodoPivote);
 
+		} else
+			raiz = nodoPivote;
 
 	}
 
@@ -332,10 +335,14 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 		nodoDesbalanceado.setIzq(auxiliarPivote);
 
 		//Cambiamos el nodo que apuntaba al desbalanceado
-		if(nodoSuperior.getIzq().equals(nodoDesbalanceado)){
-			nodoSuperior.setIzq(nodoPivote);
+		//Comprobamos si la rotacion se esta haciendo en la raiz
+		if(nodoSuperior!= null) {
+			if (nodoSuperior.getIzq().equals(nodoDesbalanceado)) {
+				nodoSuperior.setIzq(nodoPivote);
+			} else
+				nodoSuperior.setDer(nodoPivote);
 		} else
-			nodoSuperior.setDer(nodoPivote);
+			raiz = nodoPivote;
 	}
 
 	/**
@@ -358,10 +365,14 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 		segundoPivote.setDer(nodoDesbalanceado);
 
 		//Camiamos el nodo que apuntaba al desbalanceado
-		if(nodoSuperior.getIzq().equals(nodoDesbalanceado)){
-			nodoSuperior.setIzq(segundoPivote);
-		} else
-			nodoSuperior.setDer(segundoPivote);
+		//Comprobamos si la rotacion se esta haciendo en la raiz
+		if(nodoSuperior!=null) {
+			if (nodoSuperior.getIzq().equals(nodoDesbalanceado)) {
+				nodoSuperior.setIzq(segundoPivote);
+			} else
+				nodoSuperior.setDer(segundoPivote);
+		}else
+			raiz = segundoPivote;
 	}
 
 	/**
@@ -385,10 +396,14 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 		segundoPivote.setDer(primerPivote);
 
 		//Cambiamos el nodo que apuntaba al desbalanceado
-		if(nodoSuperior.getIzq().equals(nodoDesbalanceado)){
-			nodoSuperior.setIzq(segundoPivote);
+		//Comprobamos si la rotacion se esta haciendo en la raiz
+		if(nodoSuperior!= null) {
+			if (nodoSuperior.getIzq().equals(nodoDesbalanceado)) {
+				nodoSuperior.setIzq(segundoPivote);
+			} else
+				nodoSuperior.setDer(segundoPivote);
 		} else
-			nodoSuperior.setDer(segundoPivote);
+			raiz = segundoPivote;
 	}
 
 
