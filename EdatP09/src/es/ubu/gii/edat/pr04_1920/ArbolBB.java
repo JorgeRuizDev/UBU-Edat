@@ -40,7 +40,7 @@ public class ArbolBB<E> extends AbstractSet<E> {
 		/**
 		 * Constructor
 		 * 
-		 * @param Object dato El dato que contendra el nodo   
+		 * @param dato dato El dato que contendra el nodo
 		 */
 		public Nodo (E dato) {
 			this.dato = dato;
