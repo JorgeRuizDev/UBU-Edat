@@ -30,10 +30,14 @@ public class TestArbolAVL {
 	public void testAlturaPersonal(){
 
 		datos = Arrays.asList(20,10,40,8,4);
+		assertEquals(-1,arbol.altura(20));
 		arbol.addAll(datos);
+
 		assertEquals(0,arbol.altura(4));
 		assertEquals(2,arbol.altura(20));
 	}
+
+
 	@Test
 	public void testRotacionRaizPersonal(){
 		datos = Arrays.asList(1,2,3);
@@ -191,10 +195,10 @@ public class TestArbolAVL {
 
 	@Test
 	public void testProfundidad() {
-		
+
 		datos = Arrays.asList(8,20,5,40,30);
 		arbol.addAll(datos);
-		
+		assertEquals(-1, arbol.profundidad(66));
 		assertEquals(0, arbol.profundidad(8));
 		assertEquals(1, arbol.profundidad(5));
 		assertEquals(1, arbol.profundidad(30));

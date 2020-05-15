@@ -35,6 +35,8 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 	@Override
 	public boolean remove(Object o){
 
+		if (raiz == null) //No se han añadido elementos al árbol.
+			return false;
 
 		E datoBorrar;
 
@@ -91,12 +93,15 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 			}
 			else{
 				orden.add(pila.peekLast().getDato());
+
+				//Comprobamos que la pila no esté vacía para evitar nullPointers
+				if (pila.isEmpty())
+					return null;
+
 				nodoPrincipal = pila.pollLast().getDer();
 			}
 		}
-
 		return orden;
-
 	}
 
 	/**
@@ -161,6 +166,7 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 				pila.offerLast(nodoPrincipal);
 				elementosIzquierda.put(nodoPrincipal,nodoPrincipal);
 
+				assert nodoPrincipal != null;
 				nodoPrincipal = nodoPrincipal.getIzq();
 
 				//Si la izquierda está vacía, retrocedemos
@@ -173,6 +179,7 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 				pila.offerLast(nodoPrincipal);
 				elementosDerecha.put(nodoPrincipal,nodoPrincipal);
 
+				assert nodoPrincipal != null;
 				nodoPrincipal = nodoPrincipal.getDer();
 
 				//Si la derecha está vacía, retrocedemos
@@ -207,7 +214,7 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 	}
 	public int altura(Nodo dato){
 
-		if (dato == null)
+		if (dato == null || raiz == null)
 			return -1;
 		if (dato.getIzq()==null & dato.getDer()==null){
 			return 0;
@@ -234,6 +241,9 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 	 * @return profundidad del nodo que contiene el dato (ver definición en teoria)
 	 */
 	public int profundidad(E dato){
+
+		if (raiz == null || dato == null)
+			return -1;
 
 		//Nos posicionamos en la raiz
 		Nodo nodoActual = this.raiz;
@@ -389,6 +399,7 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 			segundoPivote = primerPivote.getIzq();
 		}
 		//Hacemos el Balanceo
+		assert segundoPivote != null;
 		primerPivote.setIzq(segundoPivote.getDer());
 		nodoDesbalanceado.setDer(segundoPivote.getIzq());
 
@@ -448,9 +459,5 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 		return lista.get(1);
 	}
 
-
-	private boolean esHoja (Nodo nodo){
-		return nodo.getDer() == null && nodo.getIzq() == null;
-	}
 }
 
