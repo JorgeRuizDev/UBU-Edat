@@ -290,7 +290,8 @@ public class ArbolAVL<E> extends ArbolBB<E>{
 	 * Positivo = El lado der es más largo.
 	 * Negativo = El lado izq es más largo.
 	 * 0 = Están equilibrados
-	 * abs(return) > 1 = Hay un desequlibrio
+	 * abs(return) mayor que 1 quiere decir que Hay un desequlibrio
+	 * @param raiz nodo del subArbol del que se quiere calcular el factor de desequilibrio
 	 * @return entero con signo.
 	 */
 	private int calcFactorDesequilibrio(Nodo raiz){

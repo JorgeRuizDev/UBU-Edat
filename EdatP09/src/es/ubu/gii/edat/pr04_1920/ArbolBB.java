@@ -76,7 +76,7 @@ public class ArbolBB<E> extends AbstractSet<E> {
 		/**
 		 * Establece el subarbol izquierdo de un nodo
 		 * 
-		 * @param Nodo El nuevo subarbol izquierdo de ese nodo
+		 * @param valor El nuevo subarbol izquierdo de ese nodo
 		 */
 		public void setIzq(Nodo valor) {
 			izq = valor;
@@ -93,7 +93,7 @@ public class ArbolBB<E> extends AbstractSet<E> {
 		/**
 		 * Establece el subarbol derecho de un nodo
 		 * 
-		 * @param Nodo El nuevo subarbol derecho de ese nodo
+		 * @param valor El nuevo subarbol derecho de ese nodo
 		 * 	 
 		 */
 		public void setDer(Nodo valor){
@@ -210,10 +210,10 @@ public class ArbolBB<E> extends AbstractSet<E> {
 	//////////////// MÉTODOS AUXILIARES ////////////////	
 	/**
 	 * Metodo que permite comparar dos elementos pasados por parámetro.
-	 * @param o1
-	 * @param o2
-	 * @return
-	 * @throws ClassCastException
+	 * @param o1 primer elemento a comparar
+	 * @param o2 segundo elemento a comparar
+	 * @return resultado de la comparacion
+	 * @throws ClassCastException excepcion
 	 */
 	@SuppressWarnings("unchecked")
 	protected int comparar(E o1, E o2) throws ClassCastException{            
@@ -295,9 +295,9 @@ public class ArbolBB<E> extends AbstractSet<E> {
 	  * El nuevo nodo colgará de aquel que se pasa como parametro 
 	  *  y tendrá como contenido el dato facilitado
 	  * 
-	  * @param encontrado lista que contiene el nodo sobre el que colgará el nuevo
+	  * @param padre nodo del cual descendera el dato a insertar
 	  * @param datoInsertar dato que contendrá el nuevo nodo
-	  * @return
+	  * @return Nodo creado con el nuevo dato
 	  */
 
 	 protected Nodo insertar(Nodo padre, E datoInsertar){
