@@ -12,7 +12,7 @@ import es.ubu.gii.edat.datos.Proceso;
  * Se pretende simular un sistema sencillo de planificación de procesos
  * empleando el algoritmo de SRPT 
  * 
- * @author bbaruque
+ * @author Alejandro Ortega Martinez Y Jorge Ruiz
  *
  */
 public class PlanificadorProcesos {
