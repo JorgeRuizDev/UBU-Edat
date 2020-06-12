@@ -1,8 +1,6 @@
 package es.ubu.gii.edat.pr05_1920;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 import java.util.List;
 
@@ -13,6 +11,8 @@ import org.junit.Test;
 // TODO Eliminar los imports para entregar a los alumnos
 import es.ubu.gii.edat.datos.Proceso;
 import es.ubu.gii.edat.pr05_1920.PlanificadorProcesos;
+
+import static org.junit.Assert.*;
 
 public class PlanificadorProcesosTest {
 
@@ -40,7 +40,7 @@ public class PlanificadorProcesosTest {
 	}
 
 	@Test
-	public void testAdelantaTiempo1() {
+	public void  testAdelantaTiempo1() {
 
 		testInsertaEnCola();
 		
